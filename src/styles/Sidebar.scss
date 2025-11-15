@@ -3,14 +3,14 @@
 
 .sidebar {
   background-color: $prussianBlue;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   left: 0;
   padding: 2rem 1rem;
   width: 15rem;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
   gap: 2rem;
   transition: 0.5s all;
 
@@ -19,7 +19,11 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.5rem;
-    flex: 0 0 auto;
+
+    .logo {
+      align-items: center;
+      gap: 0.5rem;
+    }
 
     .logoIcon {
       font-size: 2rem;
@@ -51,7 +55,6 @@
       font-size: 1.35rem;
       cursor: pointer;
     }
-    // stroke line
     &::after {
       content: "";
       position: absolute;
@@ -59,7 +62,7 @@
       top: 1.09375rem;
       z-index: 0;
       width: calc(15rem + 6rem);
-      background-color: $backgroundColor;
+      background-color: color.scale($prussianBlue, $lightness: 10%);
       height: 0.5px;
       transition: 0.5s all;
     }
@@ -68,10 +71,9 @@
   .profileContainer {
     display: flex;
     align-items: center;
-    width: 100%;
-    margin-top: 1rem;
+    justify-content: flex-start;
+    padding-top: 1rem;
     gap: 1rem;
-    flex: 0 0 auto;
 
     .profileImage {
       width: 3rem;
@@ -123,7 +125,7 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: space-between;
       align-items: flex-start;
       cursor: pointer;
@@ -133,6 +135,10 @@
         align-items: center;
         gap: 0.5rem;
         width: 100%;
+        cursor: pointer;
+        padding: 0.5rem 0;
+        transition: 0.5s all;
+        border-radius: 0.5rem;
 
         .icon {
           font-size: 2rem;
@@ -148,8 +154,6 @@
 
         &.active {
           background-color: color.scale($prussianBlue, $lightness: 10%);
-          border-radius: 0.5rem;
-          padding: 0.5rem 0;
           a {
             font-weight: $boldFont;
           }
@@ -157,8 +161,9 @@
 
         &:hover {
           background-color: color.scale($prussianBlue, $lightness: 10%);
-          border-radius: 0.5rem;
-          padding: 0.5rem 0;
+          a {
+            font-weight: $boldFont;
+          }
         }
       }
     }
@@ -167,32 +172,48 @@
 
 .sidebar.active {
   width: 3rem;
+  transition: width 0.4s ease;
 
+  /* ---- LOGO ---- */
   .logoContainer {
+    justify-content: center;
     h2.title {
       opacity: 0;
-    }
-  }
-
-  .burgerContainer {
-    &::after {
-      width: calc(3rem + 6rem);
+      width: 0;
+      transition: opacity 0.2s ease, width 0.3s ease;
     }
   }
 
   .profileContainer {
+    max-height: 3.5rem;
+    flex-shrink: 0;
+    transition: max-height 0.35s ease;
+
     .profileContents {
       opacity: 0;
+      width: 0;
+      transition: opacity 0.2s ease, width 0.3s ease;
     }
   }
 
   .contentsContainer {
-    ul {
-      li {
-        a {
-          opacity: 0;
-        }
+    flex-shrink: 1;
+    overflow: hidden;
+
+    ul li {
+      .icon {
+        margin-right: 0;
+      }
+
+      a {
+        opacity: 0;
+        width: 0;
+        transition: opacity 0.2s ease, width 0.3s ease;
       }
     }
+  }
+
+  .burgerContainer::after {
+    width: calc(3rem + 6rem);
   }
 }

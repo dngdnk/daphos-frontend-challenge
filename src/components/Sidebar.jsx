@@ -15,11 +15,10 @@ function Sidebar() {
 
   const handleMenuToggle = () => {
     setCloseMenu(!closeMenu);
-  }
+  };
 
   return (
-        <div className={`sidebar ${closeMenu ? "active" : ""}`}>
-
+    <div className={`sidebar ${closeMenu ? "active" : ""}`}>
       <div className={`logoContainer ${closeMenu ? "active" : ""}`}>
         <div className="logo">
           <StarRateOutlinedIcon className="logoIcon" />
@@ -42,15 +41,15 @@ function Sidebar() {
 
       <div className={`contentsContainer ${closeMenu ? "active" : ""}`}>
         <ul>
-          <li>
+          <li className={location.pathname === "/" ? "active" : ""}>
             <DashboardOutlinedIcon className="icon" />
             <Link to="/">Dashboard</Link>
           </li>
-          <li>
+          <li className={location.pathname === "/employees" ? "active" : ""}>
             <PeopleOutlineOutlinedIcon className="icon" />
             <Link to="/employees">Employees</Link>
           </li>
-          <li>
+          <li className={location.pathname === "/shifts" ? "active" : ""}>
             <CalendarMonthOutlinedIcon className="icon" />
             <Link to="/shifts">Shifts</Link>
           </li>
