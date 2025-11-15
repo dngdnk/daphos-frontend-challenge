@@ -1,0 +1,83 @@
+@use "./variables.scss" as *;
+
+.sidebar {
+  background-color: $primaryColor;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2rem 1rem;   // reduce horizontal padding
+  width: 14rem;          // widen sidebar a little to fit contents
+  height: 100vh;
+  transition: 0.5s all;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      h2.title {
+        font-size: 1.2rem;
+        margin: 0;
+        color: black;
+      }
+
+      .logoIcon {
+        font-size: 2rem;
+        color: black;
+      }
+    }
+
+    .profileContainer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;        // make sure it stays inside sidebar
+      padding-top: 1rem;
+
+      .profileImage {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;   // prevent image from shrinking
+      }
+
+      .profileContents {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        justify-content: space-between;
+
+        p.name {
+          font-size: 1rem;
+          font-weight: $boldFont;
+          color: $secondaryColor;
+          margin: 0;
+          text-transform: capitalize;
+        }
+
+        p.role {
+          font-size: 0.8rem;
+          color: $secondaryColor;
+          margin: 0;
+        }
+
+        p.email {
+          font-size: 0.8rem;
+          color: $secondaryColor;
+          margin: 0;
+          word-wrap: break-word;
+        }
+      }
+    }
+  }
+}
