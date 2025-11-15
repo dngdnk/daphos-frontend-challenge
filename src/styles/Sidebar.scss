@@ -1,4 +1,5 @@
 @use "./variables.scss" as *;
+@use "sass:color";
 
 .sidebar {
   background-color: $prussianBlue;
@@ -16,7 +17,9 @@
   .logoContainer {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 0.5rem;
+    flex: 0 0 auto;
 
     .logoIcon {
       font-size: 2rem;
@@ -65,9 +68,10 @@
   .profileContainer {
     display: flex;
     align-items: center;
-    gap: 1rem;
     width: 100%;
     margin-top: 1rem;
+    gap: 1rem;
+    flex: 0 0 auto;
 
     .profileImage {
       width: 3rem;
@@ -107,8 +111,12 @@
     }
   }
 
-  // Sidebar navigation links
   .contentsContainer {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
     ul {
       list-style: none;
       padding: 0;
@@ -118,6 +126,7 @@
       gap: 1rem;
       justify-content: space-between;
       align-items: flex-start;
+      cursor: pointer;
 
       li {
         display: flex;
@@ -128,7 +137,7 @@
         .icon {
           font-size: 2rem;
           color: $pacificBlue;
-          padding: 0 1rem 0 0;
+          padding: 0 1rem 0 0.5rem;
         }
 
         a {
@@ -138,9 +147,50 @@
         }
 
         &.active {
-          background-color: lighten($prussianBlue, 10%);
+          background-color: color.scale($prussianBlue, $lightness: 10%);
           border-radius: 0.5rem;
-          padding: 0.25rem 0.5rem;
+          padding: 0.5rem 0;
+          a {
+            font-weight: $boldFont;
+          }
+        }
+
+        &:hover {
+          background-color: color.scale($prussianBlue, $lightness: 10%);
+          border-radius: 0.5rem;
+          padding: 0.5rem 0;
+        }
+      }
+    }
+  }
+}
+
+.sidebar.active {
+  width: 3rem;
+
+  .logoContainer {
+    h2.title {
+      opacity: 0;
+    }
+  }
+
+  .burgerContainer {
+    &::after {
+      width: calc(3rem + 6rem);
+    }
+  }
+
+  .profileContainer {
+    .profileContents {
+      opacity: 0;
+    }
+  }
+
+  .contentsContainer {
+    ul {
+      li {
+        a {
+          opacity: 0;
         }
       }
     }

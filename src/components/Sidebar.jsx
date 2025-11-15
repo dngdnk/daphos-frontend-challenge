@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Profile from "../assets/sunday.png";
 import StarRateOutlinedIcon from "@mui/icons-material/StarRateOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
@@ -8,22 +9,29 @@ import MenuIcon from "@mui/icons-material/Menu";
 import "../styles/sidebar.scss";
 
 function Sidebar() {
+  const location = useLocation();
+
+  const [closeMenu, setCloseMenu] = useState(false);
+
+  const handleMenuToggle = () => {
+    setCloseMenu(!closeMenu);
+  }
+
   return (
-    <div className="sidebar">
-      <div className="logoContainer">
+        <div className={`sidebar ${closeMenu ? "active" : ""}`}>
+
+      <div className={`logoContainer ${closeMenu ? "active" : ""}`}>
         <div className="logo">
           <StarRateOutlinedIcon className="logoIcon" />
           <h2 className="title">DaphOS</h2>
         </div>
       </div>
 
-      <div className="burgerContainer">
-        {/* <div className="burgerTrigger"></div>
-        <div className="burgerMenu"></div> */}
-        <MenuIcon className="burgerIcon" />
+      <div className={`burgerContainer ${closeMenu ? "active" : ""}`}>
+        <MenuIcon className="burgerIcon" onClick={handleMenuToggle} />
       </div>
 
-      <div className="profileContainer">
+      <div className={`profileContainer ${closeMenu ? "active" : ""}`}>
         <img src={Profile} alt="Profile" className="profileImage" />
         <div className="profileContents">
           <p className="name">Hello, Sunday!</p>
@@ -32,19 +40,19 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="contentsContainer">
+      <div className={`contentsContainer ${closeMenu ? "active" : ""}`}>
         <ul>
           <li>
             <DashboardOutlinedIcon className="icon" />
-            <a href="/">Dashboard</a>
+            <Link to="/">Dashboard</Link>
           </li>
           <li>
             <PeopleOutlineOutlinedIcon className="icon" />
-            <a href="/employees">Employees</a>
+            <Link to="/employees">Employees</Link>
           </li>
           <li>
             <CalendarMonthOutlinedIcon className="icon" />
-            <a href="/shifts">Shifts</a>
+            <Link to="/shifts">Shifts</Link>
           </li>
         </ul>
       </div>
