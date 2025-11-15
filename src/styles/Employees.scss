@@ -1,0 +1,18 @@
+@use "./variables.scss" as *;
+
+.employees {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    
+}
+
+.caption {
+    font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  font-weight: $lightFont;
+  color: $jetBlack;
+  padding: 0;
+  margin: 0
+}
