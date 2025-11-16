@@ -5,8 +5,8 @@ import EmployeeData from "../data/EmployeeData.json";
 import "../styles/Employees.scss";
 
 function Employees() {
-  const [data, setData] = useState(EmployeeData); // main data
-  const [filteredData, setFilteredData] = useState(EmployeeData); // search results
+  const [data, setData] = useState(EmployeeData); 
+  const [filteredData, setFilteredData] = useState(EmployeeData); 
 
   const statusOptions = Array.from(
     new Set(EmployeeData.map((item) => item.status))
