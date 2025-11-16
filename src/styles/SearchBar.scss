@@ -2,6 +2,7 @@
 @use "./variables.scss" as *;
 
 .searchBar {
+  padding-top: 2rem;
   width: 100%;
   max-width: 85rem;
   display: flex;

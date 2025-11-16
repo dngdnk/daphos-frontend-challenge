@@ -36,6 +36,21 @@
       cursor: pointer;
       border-radius: 5px;
 
+      input {
+        width: 100%;
+        padding: 0.3rem 0.5rem;
+        font-family: "Manrope", sans-serif;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        &:focus {
+          outline: none;
+          border-color: $pacificBlue; 
+          box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+        }
+      }
+
       &:hover {
         background-color: rgba(0, 0, 0, 0.1);
         transform: scale(1.01);
@@ -47,26 +62,44 @@
         .editButton,
         .deleteButton {
           font-size: 19px;
-          color: gray; 
+          color: gray;
           cursor: pointer;
           transition: color 0.2s ease;
 
           &:hover {
-            color: #111; 
+            color: #111;
           }
         }
 
         .editButton {
-          color: #6c757d; 
+          color: #6c757d;
         }
 
         .deleteButton {
-          color: #adb5bd; 
+          color: #adb5bd;
         }
       }
     }
   }
+    select {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:disabled {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $pacificBlue;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+      background-color: #fff; 
+    }
+  }
 }
-
-
-

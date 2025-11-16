@@ -1,9 +1,16 @@
-import React from "react";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import React, { useState } from "react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import EditButton from "./EditButton"; 
 import "../styles/EmployeeTable.scss";
 
 function EmployeeTable({ data, statusOptions }) {
+  const [editingRow, setEditingRow] = useState(null);
+
+  /* allows table to know which row is in edit mode */
+  const handleEditClick = (index) => {
+    setEditingRow(index);
+  };
+
   return (
     <div className="dataTable">
       <table>
@@ -17,74 +24,39 @@ function EmployeeTable({ data, statusOptions }) {
             <th>Status</th>
             <th>Email</th>
             <th>Hours</th>
-            <th>Overtime</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((value, key) => (
-            <tr key={key} className="dataItem">
-              <td className="actions">
-                <EditRoundedIcon className="editButton" />
-                <DeleteRoundedIcon className="deleteButton" />
-              </td>
-              <td>{value.id}</td>
-              <td>{value.name}</td>
-              <td>{value.title}</td>
-              <td>{value.department}</td>
-              <td className="statusDropdown">
-                <select defaultValue={value.status}>
-                  {statusOptions.map((status, i) => (
-                    <option key={i} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>{value.email}</td>
-              <td>{value.hours_worked}</td>
-              <td>{value.overtime}</td>
-            </tr>
-          ))}
+          {data.map((value, key) => {
+            const isEditing = editingRow === key;
+
+            return (
+              <tr key={key} className="dataItem">
+                <td className="actions">
+                  <EditButton onClick={() => handleEditClick(key)} />
+                  <DeleteRoundedIcon className="deleteButton" />
+                </td>
+
+                <td>{isEditing ? <input type="text" defaultValue={value.id} /> : value.id}</td>
+                <td>{isEditing ? <input type="text" defaultValue={value.name} /> : value.name}</td>
+                <td>{isEditing ? <input type="text" defaultValue={value.title} /> : value.title}</td>
+                <td>{isEditing ? <input type="text" defaultValue={value.department} /> : value.department}</td>
+                <td>
+                  <select disabled={!isEditing} defaultValue={value.status}>
+                    {statusOptions.map((status, i) => (
+                      <option key={i} value={status}>{status}</option>
+                    ))}
+                  </select>
+                </td>
+                <td>{isEditing ? <input type="text" defaultValue={value.email} /> : value.email}</td>
+                <td>{isEditing ? <input type="text" defaultValue={value.hours_worked} /> : value.hours_worked}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
   );
 }
 
-
 export default EmployeeTable;
-
-//   const AddMember = () => {
-//     const handleValues = (event) => {
-//       event.preventDefault();
-//       const id = event.target.elements.id.value;
-//       const name = event.target.elements.name.value;
-//       const title = event.target.elements.title.value;
-//       const department = event.target.elements.department.value;
-//       const email = event.target.elements.email.value;
-//       const newEmployee = {
-//         id,
-//         name,
-//         title,
-//         department,
-//         email,
-//       };
-//     };
-
-//     return (
-//       <form className="addForm" onSubmit={handleValues}>
-//         <input type="text" name="id" placeholder="Enter ID" />
-//         <input type="text" name="name" placeholder="Enter Name" />
-//         <input type="text" name="title" placeholder="Enter Title" />
-
-//         <input type="text" name="department" placeholder="Enter Department" />
-//         <input type="text" name="email" placeholder="Enter Email" />
-
-//         <input type="text" name="status" placeholder="Enter Status" />
-//         <input type="text" name="hours" placeholder="Enter Hours" />
-//         <input type="text" name="overtime" placeholder="Enter Overtime" />
-
-//         <button type="submit">ADD NEW EMPLOYEE</button>
-//       </form>
-//     );
-//   };
