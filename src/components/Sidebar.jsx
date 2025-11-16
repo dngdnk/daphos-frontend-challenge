@@ -1,36 +1,55 @@
-import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Profile from "../assets/sunday.png";
+import MenuIcon from "@mui/icons-material/Menu";
 import StarRateOutlinedIcon from "@mui/icons-material/StarRateOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import MenuIcon from "@mui/icons-material/Menu";
-import "../styles/sidebar.scss";
 
-function Sidebar() {
+import Profile from "../assets/sunday.png";
+import "../styles/Sidebar.scss";
+
+function Sidebar({ closeMenu, setCloseMenu }) {
   const location = useLocation();
-
-  const [closeMenu, setCloseMenu] = useState(false);
 
   const handleMenuToggle = () => {
     setCloseMenu(!closeMenu);
   };
 
+  const menuItems = [
+    {
+      label: "Dashboard",
+      path: "/",
+      icon: <DashboardOutlinedIcon className="icon" />,
+    },
+    {
+      label: "Employees",
+      path: "/employees",
+      icon: <PeopleOutlineOutlinedIcon className="icon" />,
+    },
+    {
+      label: "Shifts",
+      path: "/shifts",
+      icon: <CalendarMonthOutlinedIcon className="icon" />,
+    },
+  ];
+
   return (
     <div className={`sidebar ${closeMenu ? "active" : ""}`}>
-      <div className={`logoContainer ${closeMenu ? "active" : ""}`}>
+      {/* Logo */}
+      <div className="logoContainer">
         <div className="logo">
           <StarRateOutlinedIcon className="logoIcon" />
           <h2 className="title">DaphOS</h2>
         </div>
       </div>
 
-      <div className={`burgerContainer ${closeMenu ? "active" : ""}`}>
+      {/* Burger */}
+      <div className="burgerContainer">
         <MenuIcon className="burgerIcon" onClick={handleMenuToggle} />
       </div>
 
-      <div className={`profileContainer ${closeMenu ? "active" : ""}`}>
+      {/* Profile */}
+      <div className="profileContainer">
         <img src={Profile} alt="Profile" className="profileImage" />
         <div className="profileContents">
           <p className="name">Hello, Sunday!</p>
@@ -39,20 +58,20 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className={`contentsContainer ${closeMenu ? "active" : ""}`}>
+      {/* Menu */}
+      <div className="contentsContainer">
         <ul>
-          <li className={location.pathname === "/" ? "active" : ""}>
-            <DashboardOutlinedIcon className="icon" />
-            <Link to="/">Dashboard</Link>
-          </li>
-          <li className={location.pathname === "/employees" ? "active" : ""}>
-            <PeopleOutlineOutlinedIcon className="icon" />
-            <Link to="/employees">Employees</Link>
-          </li>
-          <li className={location.pathname === "/shifts" ? "active" : ""}>
-            <CalendarMonthOutlinedIcon className="icon" />
-            <Link to="/shifts">Shifts</Link>
-          </li>
+          {menuItems.map((item) => (
+            <li
+              key={item.path}
+              className={location.pathname === item.path ? "active" : ""}
+            >
+              <Link to={item.path} className="menuLink">
+                {item.icon}
+                <span>{item.label}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

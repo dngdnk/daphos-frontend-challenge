@@ -11,13 +11,41 @@ body {
 }
 
 h1 {
-  width: 100vw;
-  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: first baseline;
+  text-align: left;
+  justify-content: flex-start;
+  align-items:flex-start;
   font-weight: 800;
   font-size: 40px;
   font-weight: 700;
-  color: #000000;
+  color: $jetBlack;
+  margin: 0;
+  padding: 0;
 }
+
+p {
+  font-size: 20px;
+  font-weight: $reallyLightFont;
+  color: $jetBlack;
+}
+
+.app {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mainContent {
+  flex: 1;
+  padding-top: 2rem;
+  padding-left: 22rem;
+  transition: all 0.5s ease;
+}
+
+.mainContent.collapsed {
+  padding-left: 10rem;
+}
+
+
+
