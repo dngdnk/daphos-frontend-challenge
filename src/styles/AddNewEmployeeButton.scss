@@ -1,0 +1,37 @@
+@use "./variables.scss" as *;
+@use "sass:color";
+
+.addEmployeeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;          // circular size
+  height: 3rem;
+  border-radius: 50%;    // makes it circular
+  border: none;
+  background-color: $pacificBlue;
+  color: white;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  
+  &:hover {
+    background-color: color.scale($pacificBlue, $lightness: +10%);
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
+  }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px inset;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($prussianBlue, 0.3);
+  }
+
+  .addPersonIcon {
+    font-size: 1.5rem; // size of the icon inside
+  }
+}

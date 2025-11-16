@@ -3,7 +3,7 @@ import React from 'react'
 function Shifts() {
   return (
     <div className='shifts'>
-      <h1>SHIFTS</h1>
+      <h1>Shift Overview</h1>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PopUp } from "../components/PopUp";
 
-/* custom hook to contain all logic in the employee data table; can be modified fetch data with HTTP calls later */
+/* custom hook to contain all logic in the employee data table */
 export default function useEmployees(initialData) {
   const [data, setData] = useState(initialData);
   const [filteredData, setFilteredData] = useState(initialData);
@@ -13,11 +13,13 @@ export default function useEmployees(initialData) {
   const [editingRow, setEditingRow] = useState(null);
   const [editedRows, setEditedRows] = useState({});
 
+  // Start editing a row
   const startEditing = (id) => {
     setEditingRow(id);
     setEditedRows({ [id]: { ...data.find((r) => r._internalId === id) } });
   };
 
+  // Handle field changes
   const handleChange = (id, field, value) => {
     setEditedRows((prev) => ({
       ...prev,
@@ -25,6 +27,7 @@ export default function useEmployees(initialData) {
     }));
   };
 
+  // Confirm save
   const confirmSave = async (id) => {
     const result = await PopUp({
       title: "Do you want to save the changes?",
@@ -42,9 +45,17 @@ export default function useEmployees(initialData) {
         confirmText: "OK",
         type: "save",
       });
+    } else if (result.isDenied) {
+      setEditingRow(null);
+      setEditedRows((prev) => {
+        const newEdited = { ...prev };
+        delete newEdited[id];
+        return newEdited;
+      });
     }
   };
 
+  // Save row
   const saveRow = (id) => {
     const updated = data.map((row) =>
       row._internalId === id ? editedRows[id] : row
@@ -53,10 +64,11 @@ export default function useEmployees(initialData) {
     setEditingRow(null);
   };
 
+  // Confirm delete
   const confirmDelete = async (row) => {
     const result = await PopUp({
       title: `Delete ${row.name}?`,
-      text: "This action cannot be undone.",
+      text: "Please double check carefully before deleting.",
       icon: "warning",
       confirmText: "Delete",
       cancelText: "Cancel",
@@ -71,13 +83,44 @@ export default function useEmployees(initialData) {
         confirmText: "OK",
         type: "delete",
       });
+    } else {
+      setEditingRow(null);
+      setEditedRows((prev) => {
+        const newEdited = { ...prev };
+        delete newEdited[row._internalId];
+        return newEdited;
+      });
     }
   };
 
+  // Delete row
   const handleDelete = (id) => {
     setData((prev) => prev.filter((r) => r._internalId !== id));
     setEditingRow(null);
   };
+
+ const addNewRow = (statusOptions = []) => {
+  if (editingRow !== null) return;
+
+  const newRow = {
+    _internalId: Date.now(), 
+    id: "",
+    name: "",
+    title: "",
+    department: "",
+    status: statusOptions[0] || "", 
+    email: "",
+    hours_worked: "",
+  };
+
+  setData((prev) => [newRow, ...prev]); 
+  setEditingRow(newRow._internalId); 
+  setEditedRows((prev) => ({
+    ...prev,
+    [newRow._internalId]: newRow,
+  }));
+};
+
 
   return {
     data,
@@ -89,5 +132,6 @@ export default function useEmployees(initialData) {
     handleChange,
     editingRow,
     editedRows,
+    addNewRow, 
   };
 }
