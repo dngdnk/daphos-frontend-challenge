@@ -3,7 +3,7 @@ import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import SaveAsRoundedIcon from "@mui/icons-material/SaveAsRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
-function EditButton({ isEditing, onEdit, onSave, onDelete }) {
+function EditButton({ isEditing, onEdit, onSaveClick, onDeleteClick }) {
   return (
     <div className="editButtonsContainer">
       {!isEditing ? (
@@ -23,7 +23,7 @@ function EditButton({ isEditing, onEdit, onSave, onDelete }) {
             className="saveButton actionIcon"
             onClick={(e) => {
               e.stopPropagation();
-              onSave();
+              onSaveClick(); 
             }}
             title="Save"
           >
@@ -33,7 +33,7 @@ function EditButton({ isEditing, onEdit, onSave, onDelete }) {
             className="deleteButton actionIcon"
             onClick={(e) => {
               e.stopPropagation();
-              onDelete();
+              onDeleteClick(); 
             }}
             title="Delete"
           >

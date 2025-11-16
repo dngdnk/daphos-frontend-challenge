@@ -1,32 +1,41 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import SearchBar from "../components/SearchBar";
 import EmployeeTable from "../components/EmployeeTable";
-import EmployeeData from "../data/EmployeeData.json";
+import EmployeeJSON from "../data/EmployeeData.json";
+import useEmployees from "../hooks/useEmployees";
 import "../styles/Employees.scss";
 
 function Employees() {
-  const [data, setData] = useState(EmployeeData); 
-  const [filteredData, setFilteredData] = useState(EmployeeData); 
+  // attach a stable internalId to avoid key/index bugs
+  const initialData = EmployeeJSON.map((item, idx) => ({
+    ...item,
+    _internalId: idx + 1,
+  }));
 
-  const statusOptions = Array.from(
-    new Set(EmployeeData.map((item) => item.status))
-  );
+  const {
+    data,
+    filteredData,
+    setFilteredData,
+    ...tableLogic
+  } = useEmployees(initialData);
+
+  const statusOptions = [...new Set(data.map((e) => e.status))];
 
   return (
     <div className="employees">
-      <h1> Employee Overview </h1>
-      <p className="caption"> Details about all your employees in one place.</p>
+      <h1>Employee Overview</h1>
+      <p className="caption">Details about all employees.</p>
 
       <SearchBar
-        placeholder="Search employees by ID, Name, Title or Department"
+        placeholder="Search by ID, Name, Title or Department"
         data={data}
         setFilteredData={setFilteredData}
       />
 
       <EmployeeTable
         data={filteredData}
-        setData={setData}
         statusOptions={statusOptions}
+        {...tableLogic}
       />
     </div>
   );

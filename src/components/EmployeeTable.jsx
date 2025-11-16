@@ -1,38 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import EditButton from "./EditButton";
 import EditableCell from "./EditableCell";
 import "../styles/EmployeeTable.scss";
 
-function EmployeeTable({ data, setData, statusOptions }) {
-  const [editingRowId, setEditingRowId] = useState(null);
-  const [editedRows, setEditedRows] = useState({});
-
-  const startEditing = (row) => {
-    setEditingRowId(row.id);
-    setEditedRows({ [row.id]: { ...row } });
-  };
-
-  const saveRow = (id) => {
-    const updatedData = data.map((row) =>
-      row.id === id ? editedRows[id] : row
-    );
-    setData(updatedData);
-    setEditingRowId(null);
-  };
-
-  const handleChange = (id, field, value) => {
-    setEditedRows((prev) => ({
-      ...prev,
-      [id]: { ...prev[id], [field]: value },
-    }));
-  };
-
-  const handleDelete = (id) => {
-    const updatedData = data.filter((row) => row.id !== id);
-    setData(updatedData);
-    if (editingRowId === id) setEditingRowId(null);
-  };
-
+function EmployeeTable({
+  data,
+  statusOptions,
+  startEditing,
+  confirmSave,
+  confirmDelete,
+  handleChange,
+  editingRow,
+  editedRows
+}) {
   return (
     <div className="dataTable">
       <table>
@@ -48,58 +28,61 @@ function EmployeeTable({ data, setData, statusOptions }) {
             <th>Hours</th>
           </tr>
         </thead>
+
         <tbody>
           {data.map((row) => {
-            const isEditing = editingRowId === row.id;
-            const currentData = editedRows[row.id] ?? row;
+            const isEditing = editingRow === row._internalId;
+            const current = editedRows[row._internalId] ?? row;
 
             return (
-              <tr key={row.id} className={isEditing ? "editing" : ""}>
+              <tr key={row._internalId} className={isEditing ? "editing" : ""}>
                 <td className="actions">
                   <EditButton
                     isEditing={isEditing}
-                    onEdit={() => startEditing(row)}
-                    onSave={() => saveRow(row.id)}
-                    onDelete={() => handleDelete(row.id)}
+                    onEdit={() => startEditing(row._internalId)}
+                    onSaveClick={() => confirmSave(row._internalId)}
+                    onDeleteClick={() => confirmDelete(row)}
                   />
                 </td>
 
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.id}
-                  onChange={(val) => handleChange(row.id, "id", val)}
+                  value={current.id}
+                  onChange={(v) => handleChange(row._internalId, "id", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.name}
-                  onChange={(val) => handleChange(row.id, "name", val)}
+                  value={current.name}
+                  onChange={(v) => handleChange(row._internalId, "name", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.title}
-                  onChange={(val) => handleChange(row.id, "title", val)}
+                  value={current.title}
+                  onChange={(v) => handleChange(row._internalId, "title", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.department}
-                  onChange={(val) => handleChange(row.id, "department", val)}
+                  value={current.department}
+                  onChange={(v) => handleChange(row._internalId, "department", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
                   type="select"
-                  value={currentData.status}
-                  onChange={(val) => handleChange(row.id, "status", val)}
+                  value={current.status}
                   selectOptions={statusOptions}
+                  onChange={(v) => handleChange(row._internalId, "status", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.email}
-                  onChange={(val) => handleChange(row.id, "email", val)}
+                  value={current.email}
+                  onChange={(v) => handleChange(row._internalId, "email", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.hours_worked}
-                  onChange={(val) => handleChange(row.id, "hours_worked", val)}
+                  value={current.hours_worked}
+                  onChange={(v) =>
+                    handleChange(row._internalId, "hours_worked", v)
+                  }
                 />
               </tr>
             );
