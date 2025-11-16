@@ -15,9 +15,6 @@ function Sidebar({ closeMenu, setCloseMenu }) {
     setCloseMenu(!closeMenu);
   };
 
-  // --------------------------------------
-  //  MENU CONFIG (ADD NEW ITEMS HERE)
-  // --------------------------------------
   const menuItems = [
     {
       label: "Dashboard",
