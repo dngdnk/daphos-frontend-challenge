@@ -49,11 +49,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 200;
 
     .burgerIcon {
       color: white;
       font-size: 1.35rem;
       cursor: pointer;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 2.2rem;
+      top: 1.09375rem;
+      width: calc(15rem + 6rem);
+      height: 0.5px;
+      background-color: color.scale($prussianBlue, $lightness: 10%);
+      transition: width 0.5s ease;
+      z-index: 0;
     }
   }
 
@@ -78,6 +91,7 @@
       p {
         margin: 0;
         color: $pacificBlue;
+        font-size: 16px;
       }
 
       .name {
@@ -151,5 +165,9 @@
 
   .profileContainer {
     max-height: 3.5rem;
+  }
+  .burgerContainer::after {
+   width: calc(3rem + 6rem);
+   z-index: 0;
   }
 }

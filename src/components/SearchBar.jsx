@@ -7,7 +7,6 @@ function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
-  // Initialize filteredData with all data
   useEffect(() => {
     setFilteredData(data);
   }, [data]);
@@ -17,7 +16,7 @@ function SearchBar({ placeholder, data }) {
     setWordEntered(searchWord);
 
     if (searchWord === "") {
-      setFilteredData(data); // show all when empty
+      setFilteredData(data);
     } else {
       const newFilter = data.filter((value) => {
         return (
