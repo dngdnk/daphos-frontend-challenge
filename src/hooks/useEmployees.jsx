@@ -1,18 +1,15 @@
-// /hooks/useEmployees.js
 import { useState, useEffect } from "react";
-import Swal from "sweetalert2";
+import { PopUp } from "../components/PopUp";
 
+/* custom hook to contain all logic in the employee data table; can be modified fetch data with HTTP calls later */
 export default function useEmployees(initialData) {
   const [data, setData] = useState(initialData);
   const [filteredData, setFilteredData] = useState(initialData);
 
-  // always sync filtered data with base data
   useEffect(() => {
     setFilteredData(data);
   }, [data]);
 
-
-  // ----- Editing state -----
   const [editingRow, setEditingRow] = useState(null);
   const [editedRows, setEditedRows] = useState({});
 
@@ -28,20 +25,23 @@ export default function useEmployees(initialData) {
     }));
   };
 
-
-  // ----- Save -----
   const confirmSave = async (id) => {
-    const result = await Swal.fire({
+    const result = await PopUp({
       title: "Do you want to save the changes?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Save",
-      denyButtonText: "Don't Save",
+      confirmText: "Save",
+      denyText: "Don't Save",
+      cancelText: "Cancel",
+      type: "save",
     });
 
     if (result.isConfirmed) {
       saveRow(id);
-      Swal.fire("Saved!", "", "success");
+      await PopUp({
+        title: "Saved!",
+        icon: "success",
+        confirmText: "OK",
+        type: "save",
+      });
     }
   };
 
@@ -49,31 +49,33 @@ export default function useEmployees(initialData) {
     const updated = data.map((row) =>
       row._internalId === id ? editedRows[id] : row
     );
-
     setData(updated);
     setEditingRow(null);
   };
 
-
-  // ----- Delete -----
   const confirmDelete = async (row) => {
-    const result = await Swal.fire({
+    const result = await PopUp({
       title: `Delete ${row.name}?`,
       text: "This action cannot be undone.",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Delete",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+      type: "delete",
     });
 
     if (result.isConfirmed) {
       handleDelete(row._internalId);
-      Swal.fire("Deleted!", "", "success");
+      await PopUp({
+        title: "Deleted!",
+        icon: "success",
+        confirmText: "OK",
+        type: "delete",
+      });
     }
   };
 
   const handleDelete = (id) => {
-    const updated = data.filter((r) => r._internalId !== id);
-    setData(updated);
+    setData((prev) => prev.filter((r) => r._internalId !== id));
     setEditingRow(null);
   };
 

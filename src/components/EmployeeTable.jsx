@@ -11,14 +11,13 @@ function EmployeeTable({
   confirmDelete,
   handleChange,
   editingRow,
-  editedRows
+  editedRows,
 }) {
   return (
     <div className="dataTable">
       <table>
         <thead>
           <tr>
-            <th>Action</th>
             <th>ID</th>
             <th>Name</th>
             <th>Title</th>
@@ -26,6 +25,7 @@ function EmployeeTable({
             <th>Status</th>
             <th>Email</th>
             <th>Hours</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -36,15 +36,6 @@ function EmployeeTable({
 
             return (
               <tr key={row._internalId} className={isEditing ? "editing" : ""}>
-                <td className="actions">
-                  <EditButton
-                    isEditing={isEditing}
-                    onEdit={() => startEditing(row._internalId)}
-                    onSaveClick={() => confirmSave(row._internalId)}
-                    onDeleteClick={() => confirmDelete(row)}
-                  />
-                </td>
-
                 <EditableCell
                   isEditing={isEditing}
                   value={current.id}
@@ -63,7 +54,9 @@ function EmployeeTable({
                 <EditableCell
                   isEditing={isEditing}
                   value={current.department}
-                  onChange={(v) => handleChange(row._internalId, "department", v)}
+                  onChange={(v) =>
+                    handleChange(row._internalId, "department", v)
+                  }
                 />
                 <EditableCell
                   isEditing={isEditing}
@@ -84,6 +77,14 @@ function EmployeeTable({
                     handleChange(row._internalId, "hours_worked", v)
                   }
                 />
+                <td className="actions">
+                  <EditButton
+                    isEditing={isEditing}
+                    onEdit={() => startEditing(row._internalId)}
+                    onSaveClick={() => confirmSave(row._internalId)}
+                    onDeleteClick={() => confirmDelete(row)}
+                  />
+                </td>
               </tr>
             );
           })}

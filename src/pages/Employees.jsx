@@ -6,7 +6,7 @@ import useEmployees from "../hooks/useEmployees";
 import "../styles/Employees.scss";
 
 function Employees() {
-  // attach a stable internalId to avoid key/index bugs
+  // attach an internalID to each employee data
   const initialData = EmployeeJSON.map((item, idx) => ({
     ...item,
     _internalId: idx + 1,
@@ -24,7 +24,7 @@ function Employees() {
   return (
     <div className="employees">
       <h1>Employee Overview</h1>
-      <p className="caption">Details about all employees.</p>
+      <p className="caption">Details about all your employees in one place.</p>
 
       <SearchBar
         placeholder="Search by ID, Name, Title or Department"
