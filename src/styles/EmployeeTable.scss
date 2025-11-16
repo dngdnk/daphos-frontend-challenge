@@ -61,8 +61,10 @@
       .actions {
         gap: 0.3rem;
         align-items: center;
+        justify-content: center;
 
         .actionIcon {
+          display: inline-block;
           align-items: center;
           justify-content: center;
           padding: 0;
@@ -84,21 +86,19 @@
         }
 
         .editButton,
-        .saveButton {
+        .saveButton,
+        .deleteButton {
           @extend .actionIcon;
           color: #6c757d;
         }
 
-        .deleteButton {
-          @extend .actionIcon;
-          color: #adb5bd;
-        }
+        
       }
     }
 
     .editing {
       background-color: rgba(0, 123, 255, 0.1);
-      box-shadow: 4px 0 0 $prussianBlue inset;
+      box-shadow: 3px 0 0 $prussianBlue inset;
       border-radius: 0;
       transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
 

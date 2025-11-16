@@ -1,20 +1,47 @@
 import React from "react";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import SaveAsRoundedIcon from "@mui/icons-material/SaveAsRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
-function EditButton({ isEditing, onEdit, onSave }) {
-  const Icon = isEditing ? SaveAsRoundedIcon : EditRoundedIcon;
-  const title = isEditing ? "Save" : "Edit";
-  const handleClick = (e) => {
-    e.stopPropagation();
-    isEditing ? onSave() : onEdit();
-  };
-  const className = isEditing ? "saveButton actionIcon" : "editButton actionIcon";
-
+function EditButton({ isEditing, onEdit, onSave, onDelete }) {
   return (
-    <button className={className} onClick={handleClick} title={title}>
-      <Icon />
-    </button>
+    <div className="editButtonsContainer">
+      {!isEditing ? (
+        <button
+          className="editButton actionIcon"
+          onClick={(e) => {
+            e.stopPropagation();
+            onEdit();
+          }}
+          title="Edit"
+        >
+          <EditRoundedIcon />
+        </button>
+      ) : (
+        <>
+          <button
+            className="saveButton actionIcon"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSave();
+            }}
+            title="Save"
+          >
+            <SaveAsRoundedIcon />
+          </button>
+          <button
+            className="deleteButton actionIcon"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+            title="Delete"
+          >
+            <DeleteRoundedIcon />
+          </button>
+        </>
+      )}
+    </div>
   );
 }
 
