@@ -6,7 +6,7 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 
 import Profile from "../assets/sunday.png";
-import "../styles/sidebar.scss";
+import "../styles/Sidebar.scss";
 
 function Sidebar({ closeMenu, setCloseMenu }) {
   const location = useLocation();

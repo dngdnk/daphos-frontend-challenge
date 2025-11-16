@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import EmployeeTable from "./EmployeeTable";
-import "../styles/searchBar.scss";
+import "../styles/SearchBar.scss";
 
-function SearchBar({ placeholder, data }) {
-  const [filteredData, setFilteredData] = useState([]);
+function SearchBar({ placeholder, data, setFilteredData }) {
   const [wordEntered, setWordEntered] = useState("");
-  const [statusOptions, setStatusOptions] = useState([]);
 
   useEffect(() => {
     setFilteredData(data);
-
-    const uniqueStatus = [...new Set(data.map((item) => item.status))];
-    setStatusOptions(uniqueStatus);
-  }, [data]);
+  }, [data, setFilteredData]);
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -25,9 +19,10 @@ function SearchBar({ placeholder, data }) {
     } else {
       const newFilter = data.filter((value) => {
         return (
-          value.title.toLowerCase().includes(searchWord.toLowerCase()) ||
+          value.department.toLowerCase().includes(searchWord.toLowerCase()) ||
           value.name.toLowerCase().includes(searchWord.toLowerCase()) ||
-          value.id.toString().includes(searchWord)
+          value.id.toString().includes(searchWord) ||
+          value.title.toLowerCase().includes(searchWord.toLowerCase())
         );
       });
       setFilteredData(newFilter);
@@ -56,8 +51,6 @@ function SearchBar({ placeholder, data }) {
           )}
         </div>
       </div>
-
-      <EmployeeTable data={filteredData} statusOptions={statusOptions} />
     </div>
   );
 }

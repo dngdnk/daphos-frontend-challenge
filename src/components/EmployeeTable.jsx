@@ -1,14 +1,36 @@
 import React, { useState } from "react";
+import EditButton from "./EditButton";
+import EditableCell from "./EditableCell";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import EditButton from "./EditButton"; 
 import "../styles/EmployeeTable.scss";
 
-function EmployeeTable({ data, statusOptions }) {
+function EmployeeTable({ data, setData, statusOptions }) {
   const [editingRow, setEditingRow] = useState(null);
+  const [editedRows, setEditedRows] = useState({});
 
-  /* allows table to know which row is in edit mode */
-  const handleEditClick = (index) => {
+  const startEditing = (index) => {
     setEditingRow(index);
+    setEditedRows({ [index]: { ...data[index] } });
+  };
+
+  const saveRow = (index) => {
+    const updatedData = data.map((row, i) =>
+      i === index ? editedRows[index] : row
+    );
+    setData(updatedData);
+    setEditingRow(null);
+  };
+
+  const handleChange = (index, field, value) => {
+    setEditedRows((prev) => ({
+      ...prev,
+      [index]: { ...prev[index], [field]: value },
+    }));
+  };
+
+  const handleDelete = (index) => {
+    const updatedData = data.filter((_, i) => i !== index);
+    setData(updatedData);
   };
 
   return (
@@ -27,29 +49,68 @@ function EmployeeTable({ data, statusOptions }) {
           </tr>
         </thead>
         <tbody>
-          {data.map((value, key) => {
-            const isEditing = editingRow === key;
+          {data.map((row, index) => {
+            const isEditing = editingRow === index;
+            const currentData = editedRows[index] ?? row;
 
             return (
-              <tr key={key} className="dataItem">
+              <tr key={index} className={isEditing ? "editing" : ""}>
                 <td className="actions">
-                  <EditButton onClick={() => handleEditClick(key)} />
-                  <DeleteRoundedIcon className="deleteButton" />
+                  <EditButton
+                    isEditing={isEditing}
+                    onEdit={() => startEditing(index)}
+                    onSave={() => saveRow(index)}
+                  />
+                  <DeleteRoundedIcon
+                    className="deleteButton actionIcon"
+                    onClick={() => handleDelete(index)}
+                  />
                 </td>
 
-                <td>{isEditing ? <input type="text" defaultValue={value.id} /> : value.id}</td>
-                <td>{isEditing ? <input type="text" defaultValue={value.name} /> : value.name}</td>
-                <td>{isEditing ? <input type="text" defaultValue={value.title} /> : value.title}</td>
-                <td>{isEditing ? <input type="text" defaultValue={value.department} /> : value.department}</td>
-                <td>
-                  <select disabled={!isEditing} defaultValue={value.status}>
-                    {statusOptions.map((status, i) => (
-                      <option key={i} value={status}>{status}</option>
-                    ))}
-                  </select>
-                </td>
-                <td>{isEditing ? <input type="text" defaultValue={value.email} /> : value.email}</td>
-                <td>{isEditing ? <input type="text" defaultValue={value.hours_worked} /> : value.hours_worked}</td>
+                <EditableCell
+                  isEditing={isEditing}
+                  value={currentData.id}
+                  onChange={(val) => handleChange(index, "id", val)}
+                  onSave={() => saveRow(index)}
+                />
+                <EditableCell
+                  isEditing={isEditing}
+                  value={currentData.name}
+                  onChange={(val) => handleChange(index, "name", val)}
+                  onSave={() => saveRow(index)}
+                />
+                <EditableCell
+                  isEditing={isEditing}
+                  value={currentData.title}
+                  onChange={(val) => handleChange(index, "title", val)}
+                  onSave={() => saveRow(index)}
+                />
+                <EditableCell
+                  isEditing={isEditing}
+                  value={currentData.department}
+                  onChange={(val) => handleChange(index, "department", val)}
+                  onSave={() => saveRow(index)}
+                />
+                <EditableCell
+                  isEditing={isEditing}
+                  type="select"
+                  value={currentData.status} 
+                  onChange={(val) => handleChange(index, "status", val)}
+                  selectOptions={statusOptions}
+                  onSave={() => saveRow(index)}
+                />
+                <EditableCell
+                  isEditing={isEditing}
+                  value={currentData.email}
+                  onChange={(val) => handleChange(index, "email", val)}
+                  onSave={() => saveRow(index)}
+                />
+                <EditableCell
+                  isEditing={isEditing}
+                  value={currentData.hours_worked}
+                  onChange={(val) => handleChange(index, "hours_worked", val)}
+                  onSave={() => saveRow(index)}
+                />
               </tr>
             );
           })}
