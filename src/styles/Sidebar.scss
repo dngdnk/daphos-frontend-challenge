@@ -12,29 +12,29 @@
   width: 15rem;
   height: 100vh;
   gap: 2rem;
-  flex-basis: 15rem;
-  transition: flex-basis 0.4s ease;
+  transition: width 0.4s ease;
+
+  .logoContainer,
+  .profileContents,
+  .contentsContainer ul li a span {
+    transition: opacity 0.3s ease, width 0.3s ease;
+  }
 
   .logoContainer {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 0.5rem;
-
-    .logo {
-      align-items: center;
-      gap: 0.5rem;
-    }
 
     .logoIcon {
       font-size: 2rem;
       color: $pacificBlue;
     }
 
-    h2.title {
+    .title {
       font-size: 1.2rem;
-      margin: 0;
       color: $pacificBlue;
+      white-space: nowrap;
+      margin: 0;
     }
   }
 
@@ -42,38 +42,24 @@
     background-color: $pacificBlue;
     position: absolute;
     top: 6rem;
-    right: -1.09375rem;
-    width: 2.1875rem;
-    height: 2.1875rem;
+    right: -1.1rem;
+    width: 2.2rem;
+    height: 2.2rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
 
     .burgerIcon {
       color: white;
       font-size: 1.35rem;
       cursor: pointer;
     }
-    &::after {
-      content: "";
-      position: absolute;
-      right: 2.1875rem;
-      top: 1.09375rem;
-      z-index: 0;
-      width: calc(15rem + 6rem);
-      background-color: color.scale($prussianBlue, $lightness: 10%);
-      height: 0.5px;
-      transition: 0.5s all;
-    }
   }
 
   .profileContainer {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding-top: 1rem;
     gap: 1rem;
 
     .profileImage {
@@ -81,44 +67,33 @@
       height: 3rem;
       border-radius: 50%;
       object-fit: cover;
-      flex-shrink: 0;
     }
 
     .profileContents {
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      justify-content: space-between;
+      gap: 0.2rem;
+      width: 100%;
 
-      p.name {
-        font-size: 1rem;
+      p {
+        margin: 0;
+        color: $pacificBlue;
+      }
+
+      .name {
         font-weight: $boldFont;
-        color: $pacificBlue;
-        margin: 0;
-        text-transform: capitalize;
       }
 
-      p.role {
-        font-size: 0.8rem;
-        color: $pacificBlue;
-        margin: 0;
-      }
-
-      p.email {
-        font-size: 0.7rem;
+      .email {
+        font-size: 0.75rem;
         font-style: italic;
-        color: $pacificBlue;
-        margin: 0;
-        word-wrap: break-word;
       }
     }
   }
 
   .contentsContainer {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex: 1;
+    overflow: hidden;
 
     ul {
       list-style: none;
@@ -127,43 +102,36 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      justify-content: space-between;
-      align-items: flex-start;
-      cursor: pointer;
 
       li {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
         width: 100%;
-        cursor: pointer;
-        padding: 0.5rem 0;
-        transition: 0.5s all;
         border-radius: 0.5rem;
+        transition: background-color 0.3s ease;
 
-        .icon {
-          font-size: 2rem;
-          color: $pacificBlue;
-          padding: 0 1rem 0 0.5rem;
-        }
-
-        a {
-          text-decoration: none;
-          color: $pacificBlue;
-          font-size: 1.2rem;
-        }
-
-        &.active {
-          background-color: color.scale($prussianBlue, $lightness: 10%);
-          a {
-            font-weight: $boldFont;
-          }
-        }
-
+        &.active,
         &:hover {
           background-color: color.scale($prussianBlue, $lightness: 10%);
           a {
-            font-weight: $boldFont;
+            font-weight: 800;
+          }
+        }
+
+        .menuLink {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem;
+          text-decoration: none;
+          color: $pacificBlue;
+          width: 100%;
+
+          .icon {
+            font-size: 1.8rem;
+          }
+
+          span {
+            white-space: nowrap;
+            font-size: 1.1rem;
           }
         }
       }
@@ -173,47 +141,15 @@
 
 .sidebar.active {
   width: 3rem;
-  transition: width 0.4s ease;
 
-  .logoContainer {
-    justify-content: center;
-    h2.title {
-      opacity: 0;
-      width: 0;
-      transition: opacity 0.2s ease, width 0.3s ease;
-    }
+  .title,
+  .profileContents,
+  .contentsContainer ul li a span {
+    opacity: 0;
+    width: 0;
   }
 
   .profileContainer {
     max-height: 3.5rem;
-    flex-shrink: 0;
-    transition: max-height 0.35s ease;
-
-    .profileContents {
-      opacity: 0;
-      width: 0;
-      transition: opacity 0.2s ease, width 0.3s ease;
-    }
-  }
-
-  .contentsContainer {
-    flex-shrink: 1;
-    overflow: hidden;
-
-    ul li {
-      .icon {
-        margin-right: 0;
-      }
-
-      a {
-        opacity: 0;
-        width: 0;
-        transition: opacity 0.2s ease, width 0.3s ease;
-      }
-    }
-  }
-
-  .burgerContainer::after {
-    width: calc(3rem + 6rem);
   }
 }

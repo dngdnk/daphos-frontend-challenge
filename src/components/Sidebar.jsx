@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 import StarRateOutlinedIcon from "@mui/icons-material/StarRateOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import Profile from "../assets/sunday.png";
 import "../styles/sidebar.scss";
 
@@ -14,8 +15,30 @@ function Sidebar({ closeMenu, setCloseMenu }) {
     setCloseMenu(!closeMenu);
   };
 
+  // --------------------------------------
+  //  MENU CONFIG (ADD NEW ITEMS HERE)
+  // --------------------------------------
+  const menuItems = [
+    {
+      label: "Dashboard",
+      path: "/",
+      icon: <DashboardOutlinedIcon className="icon" />,
+    },
+    {
+      label: "Employees",
+      path: "/employees",
+      icon: <PeopleOutlineOutlinedIcon className="icon" />,
+    },
+    {
+      label: "Shifts",
+      path: "/shifts",
+      icon: <CalendarMonthOutlinedIcon className="icon" />,
+    },
+  ];
+
   return (
     <div className={`sidebar ${closeMenu ? "active" : ""}`}>
+      {/* Logo */}
       <div className="logoContainer">
         <div className="logo">
           <StarRateOutlinedIcon className="logoIcon" />
@@ -23,10 +46,12 @@ function Sidebar({ closeMenu, setCloseMenu }) {
         </div>
       </div>
 
+      {/* Burger */}
       <div className="burgerContainer">
         <MenuIcon className="burgerIcon" onClick={handleMenuToggle} />
       </div>
 
+      {/* Profile */}
       <div className="profileContainer">
         <img src={Profile} alt="Profile" className="profileImage" />
         <div className="profileContents">
@@ -36,20 +61,20 @@ function Sidebar({ closeMenu, setCloseMenu }) {
         </div>
       </div>
 
+      {/* Menu */}
       <div className="contentsContainer">
         <ul>
-          <li className={location.pathname === "/" ? "active" : ""}>
-            <DashboardOutlinedIcon className="icon" />
-            <Link to="/">Dashboard</Link>
-          </li>
-          <li className={location.pathname === "/employees" ? "active" : ""}>
-            <PeopleOutlineOutlinedIcon className="icon" />
-            <Link to="/employees">Employees</Link>
-          </li>
-          <li className={location.pathname === "/shifts" ? "active" : ""}>
-            <CalendarMonthOutlinedIcon className="icon" />
-            <Link to="/shifts">Shifts</Link>
-          </li>
+          {menuItems.map((item) => (
+            <li
+              key={item.path}
+              className={location.pathname === item.path ? "active" : ""}
+            >
+              <Link to={item.path} className="menuLink">
+                {item.icon}
+                <span>{item.label}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

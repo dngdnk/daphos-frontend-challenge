@@ -1,53 +1,88 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "../styles/searchBar.scss";
 
 function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
-    const [wordEntered, setWordEntered] = useState("");
+  const [wordEntered, setWordEntered] = useState("");
 
+  // Initialize filteredData with all data
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
-    const newFilter = data.filter((value) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
-    });
 
     if (searchWord === "") {
-      setFilteredData([]);
+      setFilteredData(data); // show all when empty
     } else {
+      const newFilter = data.filter((value) => {
+        return (
+          value.title.toLowerCase().includes(searchWord.toLowerCase()) ||
+          value.name.toLowerCase().includes(searchWord.toLowerCase()) ||
+          value.id.toString().includes(searchWord)
+        );
+      });
       setFilteredData(newFilter);
     }
   };
 
   const clearInput = () => {
-    setFilteredData([]);
     setWordEntered("");
-  }
+    setFilteredData(data);
+  };
 
   return (
     <div className="searchBar">
       <div className="searchInputs">
-        <input type="text" placeholder={placeholder} value= {wordEntered} onChange={handleFilter} />
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={wordEntered}
+          onChange={handleFilter}
+        />
         <div className="searchIcon">
-          {filteredData.length === 0 ? (
+          {wordEntered === "" ? (
             <SearchRoundedIcon />
           ) : (
-            <CloseRoundedIcon id="clearButton" onClick = {clearInput} />
+            <CloseRoundedIcon id="clearButton" onClick={clearInput} />
           )}
         </div>
       </div>
-      {filteredData.length != 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0, 15).map((value, key) => (
-            <a key={key} className="dataItem">
-              <p>{value.title}</p>
-            </a>
-          ))}
-        </div>
-      )}
+
+      <div className="dataResult">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Title</th>
+              <th>Department</th>
+              <th>Status</th>
+              <th>Email</th>
+              <th>Hours</th>
+              <th>Overtime</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((value, key) => (
+              <tr key={key} className="dataItem">
+                <td>{value.id}</td>
+                <td>{value.name}</td>
+                <td>{value.title}</td>
+                <td>{value.department}</td>
+                <td>{value.status}</td>
+                <td>{value.email}</td>
+                <td>{value.hours_worked}</td>
+                <td>{value.overtime}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
