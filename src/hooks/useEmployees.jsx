@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { PopUp } from "../components/PopUp";
 import { sortById } from "../helpers/SortByID";
 
-
 /**
  * Custom hook to manage employee table data and editing state.
  */

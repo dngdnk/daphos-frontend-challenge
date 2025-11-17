@@ -4,7 +4,7 @@
 
 .swal2-popup {
   font-family: "Roboto", sans-serif;
-  background: #f9f9f9;  
+  background: #f9f9f9;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -18,7 +18,7 @@
 
 .swal2-content {
   font-size: 1rem;
-  color: #444; 
+  color: #444;
   margin-bottom: 1.5rem;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .swal2-confirm-save {
-  background-color: $oceanBlue; 
+  background-color: $oceanBlue;
   color: white !important;
   border: none;
   padding: 0.6rem 1.5rem;
@@ -41,14 +41,13 @@
 }
 
 .swal2-confirm-save:hover {
-  background-color: color.scale($oceanBlue, $lightness: -15%); // 15% darker
+  background-color: color.scale($oceanBlue, $lightness: -15%); 
   transform: translateY(-2px);
 }
 
 .swal2-confirm-save:focus {
   box-shadow: 0 0 0 3px rgba(0, 172, 193, 0.35);
 }
-
 
 .swal2-popup-delete {
   background-color: $backgroundColor;
@@ -59,9 +58,8 @@
   color: #c62828;
 }
 
-
 .swal2-confirm-delete {
-  background-color: #f44336; 
+  background-color: #f44336;
   color: white !important;
   border: none;
   padding: 0.6rem 1.5rem;
@@ -70,11 +68,10 @@
 }
 
 .swal2-confirm-delete:hover {
-  background-color: #d32f2f; /* darker red */
+  background-color: #d32f2f; 
   transform: translateY(-2px);
 }
 
 .swal2-confirm-delete:focus {
   box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.4);
 }
-

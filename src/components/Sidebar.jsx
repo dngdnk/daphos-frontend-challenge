@@ -1,11 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import HeartBrokenRoundedIcon from '@mui/icons-material/HeartBrokenRounded';
-import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
-import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
-import WorkHistoryRoundedIcon from '@mui/icons-material/WorkHistoryRounded';
-import PersonPinRoundedIcon from '@mui/icons-material/PersonPinRounded';
-import MarkAsUnreadRoundedIcon from '@mui/icons-material/MarkAsUnreadRounded';
+import HeartBrokenRoundedIcon from "@mui/icons-material/HeartBrokenRounded";
+import WidgetsRoundedIcon from "@mui/icons-material/WidgetsRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
+import PersonPinRoundedIcon from "@mui/icons-material/PersonPinRounded";
+import MarkAsUnreadRoundedIcon from "@mui/icons-material/MarkAsUnreadRounded";
 import Profile from "../assets/sunday.png";
 import "../styles/Sidebar.scss";
 
@@ -32,7 +32,7 @@ function Sidebar({ closeMenu, setCloseMenu }) {
       path: "/shifts",
       icon: <WorkHistoryRoundedIcon className="icon" />,
     },
-      {
+    {
       label: "Mailbox",
       path: "/mailbox",
       icon: <MarkAsUnreadRoundedIcon className="icon" />,
