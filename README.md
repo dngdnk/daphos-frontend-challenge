@@ -18,7 +18,7 @@ Built with React.js + Vite as part of the DaphOS Frontend Coding Challenge.
 To run this project locally, follow these steps: 
 1. Clone the repository:
 ```
-git clone [https://github.com/dngdnk/daphos-frontend-challenge.git]
+git clone https://github.com/dngdnk/daphos-frontend-challenge.git
 ```
 2. Install dependencies:
 ```
