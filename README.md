@@ -20,18 +20,15 @@ To run this project locally, follow these steps:
 ```
 git clone https://github.com/your-username/your-repo.git
 cd your-repo>
-
 ```
 2. Install dependencies:
 ```
 npm install
-
 ```
 3. Start the development server:
 ```
 npm run dev
-
 ```
-4. Open your browser and navigate ti http://localhost:5173
+4. Open your browser and navigate to: http://localhost:5173 (or another port shown in your terminal)
 
 
