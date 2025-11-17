@@ -5,6 +5,7 @@ import "../styles/EmployeeTable.scss";
 
 function EmployeeTable({
   data,
+  departmentOptions,
   statusOptions,
   startEditing,
   confirmSave,
@@ -12,6 +13,7 @@ function EmployeeTable({
   handleChange,
   editingRow,
   editedRows,
+  exitEditing,
 }) {
   return (
     <div className="dataTable">
@@ -53,7 +55,9 @@ function EmployeeTable({
                 />
                 <EditableCell
                   isEditing={isEditing}
+                  type="select"
                   value={current.department}
+                  selectOptions={departmentOptions} 
                   onChange={(v) =>
                     handleChange(row._internalId, "department", v)
                   }
@@ -82,6 +86,7 @@ function EmployeeTable({
                     isEditing={isEditing}
                     onEdit={() => startEditing(row._internalId)}
                     onSaveClick={() => confirmSave(row._internalId)}
+                    onExitEdit={() => exitEditing(row._internalId)}
                     onDeleteClick={() => confirmDelete(row)}
                   />
                 </td>

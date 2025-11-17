@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import "../styles/Dashboard.scss";
 
 function Dashboard() {
   return (
-    <div className='dashboard'>
-      <h1>DASHBOARD</h1>
+    <div className="dashboard">
+      <div className= "dashboardHeader">
+        <h1>Hello, Sunday :) <span class="waving-hand">👋</span> </h1>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

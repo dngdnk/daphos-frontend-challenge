@@ -1,25 +1,28 @@
 import { useState, useEffect } from "react";
 import { PopUp } from "../components/PopUp";
+import { sortById } from "../helpers/SortByID";
 
-/* custom hook to contain all logic in the employee data table */
+
+/**
+ * Custom hook to manage employee table data and editing state.
+ */
 export default function useEmployees(initialData) {
   const [data, setData] = useState(initialData);
   const [filteredData, setFilteredData] = useState(initialData);
-
-  useEffect(() => {
-    setFilteredData(data);
-  }, [data]);
-
   const [editingRow, setEditingRow] = useState(null);
   const [editedRows, setEditedRows] = useState({});
 
-  // Start editing a row
+  useEffect(() => {
+    setFilteredData(sortById(data));
+  }, [data]);
+
+  /** Start editing a row */
   const startEditing = (id) => {
     setEditingRow(id);
-    setEditedRows({ [id]: { ...data.find((r) => r._internalId === id) } });
+    setEditedRows({ [id]: { ...data.find((row) => row._internalId === id) } });
   };
 
-  // Handle field changes
+  /** Handle field changes in a row */
   const handleChange = (id, field, value) => {
     setEditedRows((prev) => ({
       ...prev,
@@ -27,7 +30,7 @@ export default function useEmployees(initialData) {
     }));
   };
 
-  // Confirm save
+  /** Confirm saving changes to a row */
   const confirmSave = async (id) => {
     const result = await PopUp({
       title: "Do you want to save the changes?",
@@ -46,25 +49,22 @@ export default function useEmployees(initialData) {
         type: "save",
       });
     } else if (result.isDenied) {
-      setEditingRow(null);
-      setEditedRows((prev) => {
-        const newEdited = { ...prev };
-        delete newEdited[id];
-        return newEdited;
-      });
+      exitEditing(id);
     }
   };
 
-  // Save row
+  /** Save changes to a row */
   const saveRow = (id) => {
-    const updated = data.map((row) =>
-      row._internalId === id ? editedRows[id] : row
+    setData((prev) =>
+      sortById(
+        prev.map((row) => (row._internalId === id ? editedRows[id] : row))
+      )
     );
-    setData(updated);
+
     setEditingRow(null);
   };
 
-  // Confirm delete
+  /** Confirm deletion of a row */
   const confirmDelete = async (row) => {
     const result = await PopUp({
       title: `Delete ${row.name}?`,
@@ -84,54 +84,73 @@ export default function useEmployees(initialData) {
         type: "delete",
       });
     } else {
-      setEditingRow(null);
-      setEditedRows((prev) => {
-        const newEdited = { ...prev };
-        delete newEdited[row._internalId];
-        return newEdited;
-      });
+      exitEditing(row._internalId);
     }
   };
 
-  // Delete row
+  /** Delete a row */
   const handleDelete = (id) => {
-    setData((prev) => prev.filter((r) => r._internalId !== id));
+    setData((prev) => sortById(prev.filter((row) => row._internalId !== id)));
     setEditingRow(null);
   };
 
- const addNewRow = (statusOptions = []) => {
-  if (editingRow !== null) return;
+  /** Add a new row to input a new employee*/
+  const addNewRow = (statusOptions = [], departmentOptions = []) => {
+    if (editingRow !== null) return;
 
-  const newRow = {
-    _internalId: Date.now(), 
-    id: "",
-    name: "",
-    title: "",
-    department: "",
-    status: statusOptions[0] || "", 
-    email: "",
-    hours_worked: "",
+    const newRow = {
+      _internalId: Date.now(),
+      id: "",
+      name: "",
+      title: "",
+      department: "",
+      status: "",
+      email: "",
+      hours_worked: "",
+    };
+
+    setData((prev) => sortById([newRow, ...prev]));
+    setEditingRow(newRow._internalId);
+    setEditedRows((prev) => ({ ...prev, [newRow._internalId]: newRow }));
   };
 
-  setData((prev) => [newRow, ...prev]); 
-  setEditingRow(newRow._internalId); 
-  setEditedRows((prev) => ({
-    ...prev,
-    [newRow._internalId]: newRow,
-  }));
-};
+  /** Exit edit mode without saving changes */
+  const exitEditing = (id) => {
+    setEditingRow(null);
 
+    setEditedRows((prev) => {
+      const updated = { ...prev };
+      const row = updated[id];
+
+      delete updated[id];
+
+      if (row) {
+        const isEmpty = Object.entries(row)
+          .filter(([key]) => key !== "_internalId")
+          .every(([_, value]) => value === "");
+
+        if (isEmpty) {
+          setData((prevData) =>
+            prevData.filter((item) => item._internalId !== id)
+          );
+        }
+      }
+
+      return updated;
+    });
+  };
 
   return {
     data,
     filteredData,
     setFilteredData,
-    startEditing,
-    confirmSave,
-    confirmDelete,
-    handleChange,
     editingRow,
     editedRows,
-    addNewRow, 
+    startEditing,
+    handleChange,
+    confirmSave,
+    confirmDelete,
+    addNewRow,
+    exitEditing,
   };
 }

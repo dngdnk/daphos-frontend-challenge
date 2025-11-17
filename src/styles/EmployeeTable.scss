@@ -33,12 +33,12 @@
         font-family: "Manrope", sans-serif;
         font-size: 16px;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 5px;
         box-sizing: border-box;
 
         &:focus {
           outline: none;
-          border-color: $pacificBlue;
+          border-color: $deepspaceBlue;
           box-shadow: 0 0 4px $prussianBlue;
         }
       }
@@ -49,49 +49,58 @@
       }
 
       .actions {
-        gap: 0.3rem;
         align-items: center;
         justify-content: center;
 
         .actionIcon {
-          display: inline-block;
+          display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0;
+          padding: 0.1rem;
           background: none;
           border: none;
           cursor: pointer;
           transition: color 0.2s ease, transform 0.1s ease;
-          font-size: 1.2rem;
 
           svg {
-            width: 1.2rem;
-            height: 1.2rem;
-          }
-
-          &:hover {
-            transform: scale(1.1);
-            color: #111;
+            width: 2rem;
+            height: 1.5rem;
           }
         }
 
         .editButton,
         .saveButton,
+        .exitButton,
+        .profileButton,
+        .shiftButton {
+          @extend .actionIcon;
+          color: #5a7385;
+          &:hover {
+            transform: scale(1.1);
+            color: $deepspaceBlue;
+          }
+        }
+
         .deleteButton {
           @extend .actionIcon;
-          color: #6c757d;
+          color: #dc3545;
+          &:hover {
+            transform: scale(1.1);
+            color: #851f29;
+        
+          }
         }
       }
     }
 
     .editing {
-      background-color: rgba(0, 123, 255, 0.1);
-      box-shadow: 4px 0 0 $prussianBlue inset;
+      background-color: rgba(6, 101, 202, 0.1);
+      box-shadow: 4px 0 0 $deepspaceBlue inset;
       border-radius: 0;
       transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
 
       &:hover {
-        background-color: rgba(0, 123, 255, 0.2);
+        background-color: $greyBlue;
         transform: scale(1.01);
       }
     }
@@ -119,4 +128,37 @@
       background-color: #fff;
     }
   }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 9.5%;
+  } // ID
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 16%;
+  } // name
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 16%;
+  } // title
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 13.5%;
+  } // department
+  th:nth-child(5),
+  td:nth-child(5) {
+    width: 11%;
+  } // status
+  th:nth-child(6),
+  td:nth-child(6) {
+    width: 15%;
+  } // email
+  th:nth-child(7),
+  td:nth-child(7) {
+    width: 10%;
+  } // hours
+  th:nth-child(8),
+  td:nth-child(8) {
+    width: 13.5%;
+  } // actions
 }

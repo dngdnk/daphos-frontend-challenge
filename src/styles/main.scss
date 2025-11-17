@@ -6,13 +6,15 @@ body {
   width: 100vw;
   font-family: $fontFamily;
   -webkit-font-smoothing: antialiased;
-  //   background: linear-gradient(
-  //   180deg,
-  //   #ffffff 10%,
-  //   #5eb4e6 30%,
-  //   #ffffff 100%
-  // );
-  background-color: $backgroundColor;
+
+  background: #b8d3db;
+  background: linear-gradient(
+    0deg,
+    rgba(184, 211, 219, 1) 0%,
+    rgba(227, 227, 227, 1) 38%,
+    rgba(228, 228, 228, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
 
   text-transform: capitalize;
 }
@@ -46,7 +48,7 @@ p {
 .mainContent {
   flex: 1;
   padding-top: 2rem;
-  padding-left: 22rem;
+  padding-left: 24rem;
   transition: all 0.5s ease;
 }
 

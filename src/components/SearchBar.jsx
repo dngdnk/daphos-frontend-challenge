@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { sortById } from "../helpers/SortByID";
 import "../styles/SearchBar.scss";
 
 function SearchBar({ placeholder, data, setFilteredData }) {
   const [wordEntered, setWordEntered] = useState("");
 
   useEffect(() => {
-    setFilteredData(data);
-  }, [data, setFilteredData]);
+    setFilteredData(sortById(data));
+  }, [data]);
+
+  useEffect(() => {
+    setFilteredData(sortById(data));
+  }, [data]);
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
 
     if (searchWord === "") {
-      setFilteredData(data);
+      setFilteredData(sortById(data));
     } else {
       const newFilter = data.filter((value) => {
         return (
@@ -25,7 +30,7 @@ function SearchBar({ placeholder, data, setFilteredData }) {
           value.title.toLowerCase().includes(searchWord.toLowerCase())
         );
       });
-      setFilteredData(newFilter);
+      setFilteredData(sortById(newFilter));
     }
   };
 

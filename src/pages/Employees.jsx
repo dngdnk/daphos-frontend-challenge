@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "../components/SearchBar";
 import EmployeeTable from "../components/EmployeeTable";
 import AddNewEmployeeButton from "../components/AddNewEmployeeButton";
+import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import EmployeeJSON from "../data/EmployeeData.json";
 import useEmployees from "../hooks/useEmployees";
 import "../styles/Employees.scss";
@@ -17,6 +18,7 @@ function Employees() {
     useEmployees(initialData);
 
   const statusOptions = [...new Set(data.map((e) => e.status))];
+  const departmentOptions = [...new Set(data.map((e) => e.department))];
 
   return (
     <div className="employees">
@@ -28,21 +30,30 @@ function Employees() {
       </div>
 
       <div className="contentContainer">
-        <SearchBar
-          placeholder="Search by ID, Name, Title or Department"
-          data={data}
-          setFilteredData={setFilteredData}
-        />
+        <div className="topControls">
+          <SearchBar
+            placeholder="Search by ID, Name, Title or Department"
+            data={data}
+            setFilteredData={setFilteredData}
+          />
 
-        <div className="tableAndButton">
-          <div className="tableWrapper">
-            <EmployeeTable
-              data={filteredData}
-              statusOptions={statusOptions}
-              {...tableLogic}
+          <div className="employeeButtons">
+            <AddNewEmployeeButton
+              onAdd={() => addNewRow(statusOptions, departmentOptions)}
             />
+            <button className="downloadButton" title="Download">
+              <DownloadRoundedIcon className="downloadIcon" />
+            </button>
           </div>
-          <AddNewEmployeeButton onAdd={() => addNewRow(statusOptions)} />
+        </div>
+
+        <div className="tableWrapper">
+          <EmployeeTable
+            data={filteredData}
+            statusOptions={statusOptions}
+            departmentOptions={departmentOptions}
+            {...tableLogic}
+          />
         </div>
       </div>
     </div>

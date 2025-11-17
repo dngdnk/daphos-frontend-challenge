@@ -2,7 +2,7 @@
 @use "sass:color";
 
 .sidebar {
-  background-color: $prussianBlue;
+  background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -13,6 +13,7 @@
   height: 100vh;
   gap: 2rem;
   transition: width 0.4s ease;
+  // box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 1px;
 
   .logoContainer,
   .profileContents,
@@ -24,22 +25,32 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-bottom: 3rem;
 
-    .logoIcon {
-      font-size: 2rem;
-      color: $pacificBlue;
-    }
+    .logo {
+      padding-left: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
-    .title {
-      font-size: 1.2rem;
-      color: $pacificBlue;
-      white-space: nowrap;
-      margin: 0;
+      .logoIcon {
+        font-size: 2rem;
+        color: $deepspaceBlue;
+      }
+
+      .title {
+        font-size: 1.2rem;
+        color: $deepspaceBlue;
+        margin: 0;
+        line-height: 1;
+        white-space: nowrap;
+      }
     }
   }
 
   .burgerContainer {
-    background-color: $pacificBlue;
+    background-color: $deepspaceBlue;
     position: absolute;
     top: 6rem;
     right: -1.1rem;
@@ -50,6 +61,24 @@
     justify-content: center;
     align-items: center;
     z-index: 200;
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 4px;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+
+    &:hover {
+      background-color: color.scale($greyBlue, $lightness: 0%);
+      transform: scale(1.05);
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
+    }
+
+    &:active {
+      transform: scale(0.95);
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px inset;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($prussianBlue, 0.3);
+    }
 
     .burgerIcon {
       color: white;
@@ -63,8 +92,8 @@
       right: 2.2rem;
       top: 1.09375rem;
       width: calc(15rem + 6rem);
-      height: 0.5px;
-      background-color: color.scale($prussianBlue, $lightness: 10%);
+      height: 1.5px;
+      background-color: rgb(255, 255, 255);
       transition: width 0.5s ease;
       z-index: 0;
     }
@@ -74,13 +103,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding-top: 1rem;
 
     .profileImage {
       width: 3rem;
       height: 3rem;
       border-radius: 50%;
       object-fit: cover;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
     }
 
     .profileContents {
@@ -91,16 +120,20 @@
 
       p {
         margin: 0;
-        color: $pacificBlue;
-        font-size: 16px;
+        color: $deepspaceBlue;
+        font-size: 17px;
       }
 
       .name {
         font-weight: $boldFont;
       }
 
+      .role {
+        font-size: 14px;
+      }
+
       .email {
-        font-size: 0.75rem;
+        font-size: 14px;
         font-style: italic;
       }
     }
@@ -120,12 +153,12 @@
 
       li {
         width: 100%;
-        border-radius: 0.5rem;
+        border-radius: 10px;
         transition: background-color 0.3s ease;
 
         &.active,
         &:hover {
-          background-color: color.scale($prussianBlue, $lightness: 10%);
+          background-color: color.scale($greyBlue, $lightness: 0%);
           a {
             font-weight: 800;
           }
@@ -137,7 +170,7 @@
           gap: 0.5rem;
           padding: 0.5rem;
           text-decoration: none;
-          color: $pacificBlue;
+          color: $deepspaceBlue;
           width: 100%;
 
           .icon {
@@ -168,7 +201,7 @@
     max-height: 3.5rem;
   }
   .burgerContainer::after {
-   width: calc(3rem + 6rem);
-   z-index: 0;
+    width: calc(3rem + 6rem);
+    z-index: 0;
   }
 }
