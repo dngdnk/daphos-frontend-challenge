@@ -31,7 +31,7 @@ npm run dev
 4. Open your browser and navigate to: http://localhost:5173 (or another port shown in your terminal)
 
 ## Tech Stack & Libraries
-- **React + Vite**:Core framework and bundler  
+- **React + Vite**: Core framework and bundler  
 - **MUI Icons**: Icon library  
 - **SweetAlert2**: Popup alerts and modals  
 - **react-big-calendar**: Calendar UI component  
