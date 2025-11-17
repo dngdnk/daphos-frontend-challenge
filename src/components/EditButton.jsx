@@ -16,7 +16,7 @@ function EditButton({
   return (
     <div className="editButtonsContainer">
       {!isEditing ? (
-        <div style={{gap: "0.5rem" }}>
+        <div style={{ gap: "0.5rem" }}>
           <button
             className="editButton actionIcon"
             onClick={(e) => {

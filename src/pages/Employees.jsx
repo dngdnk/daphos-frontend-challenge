@@ -8,7 +8,7 @@ import useEmployees from "../hooks/useEmployees";
 import "../styles/Employees.scss";
 
 function Employees() {
-  // attach an internalID to each employee data
+  // attach an internalID to each employee data for accurate change handling to the row (via delete or add)
   const initialData = EmployeeJSON.map((item, idx) => ({
     ...item,
     _internalId: idx + 1,

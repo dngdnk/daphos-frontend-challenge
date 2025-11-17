@@ -8,7 +8,7 @@ export const PopUp = async ({
   confirmText = "OK",
   cancelText = "Cancel",
   denyText = null,
-  type = "default", 
+  type = "default",
 }) => {
   const options = {
     title,
@@ -18,7 +18,7 @@ export const PopUp = async ({
     confirmButtonText: confirmText,
     cancelButtonText: cancelText,
     customClass: {
-      popup: `swal2-popup swal2-popup-${type}`, 
+      popup: `swal2-popup swal2-popup-${type}`,
       title: `swal2-title swal2-title-${type}`,
       content: `swal2-content swal2-content-${type}`,
       confirmButton: `swal2-confirm swal2-confirm-${type}`,

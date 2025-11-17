@@ -57,7 +57,7 @@ function EmployeeTable({
                   isEditing={isEditing}
                   type="select"
                   value={current.department}
-                  selectOptions={departmentOptions} 
+                  selectOptions={departmentOptions}
                   onChange={(v) =>
                     handleChange(row._internalId, "department", v)
                   }

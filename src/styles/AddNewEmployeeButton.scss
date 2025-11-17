@@ -2,36 +2,36 @@
 @use "sass:color";
 
 .addEmployeeButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: none;
-    background-color: $deepspaceBlue;
-    color: white;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 4px;
-    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  background-color: $deepspaceBlue;
+  color: white;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 4px;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
 
-    &:hover {
-      background-color: $greyBlue;
-      transform: scale(1.05);
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
-    }
-
-    &:active {
-      transform: scale(0.95);
-      box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px inset;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 px rgba($prussianBlue, 0.3);
-    }
-
-    .addPersonIcon {
-      font-size: 1.5rem;
-    }
+  &:hover {
+    background-color: $greyBlue;
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
   }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px inset;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 px rgba($prussianBlue, 0.3);
+  }
+
+  .addPersonIcon {
+    font-size: 1.5rem;
+  }
+}

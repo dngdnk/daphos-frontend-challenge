@@ -37,16 +37,14 @@
 .shiftsContent {
   display: flex;
   flex: 1;
-  gap: 1rem;
 }
 
 .leftPane {
-  margin-top: 0rem;
+  margin-top: 2rem;
   margin-right: 2rem;
   padding-left: 0rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   width: 16.5%;
 
   .shiftsSearchBar {
@@ -56,6 +54,7 @@
 
   .employeeSearchContainer {
     width: 100%;
+    max-height: 100%;
   }
 
   .employeeList {
@@ -66,7 +65,7 @@
     overflow: hidden;
     overflow-y: auto;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    max-height: 50vh;
+    max-height: 45vh;
     flex: 1;
     min-height: 100px;
     display: flex;
@@ -111,30 +110,28 @@
 
 .rightPane {
   flex: 1 1 70%;
-  max-width: 70%;
+  max-width: 75%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow: visible;
   overflow-y: auto;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  height: 120vh;
 
-  .rightPaneHeader {
-    h2 {
-      margin: 0;
-    }
+  .calendarContainer {
+    flex: 0 0 auto;
+    min-height: 70vh;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
-    .calendarContainer {
-      flex: 1;
-      background: #f9f9f9;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    }
+    display: flex;
+    flex-direction: column;
 
-    .calendarPlaceholder {
-      margin-top: 0.5rem;
-      color: #666;
-      font-style: italic;
+    .rbc-calendar {
+      height: 100%;
     }
   }
 }

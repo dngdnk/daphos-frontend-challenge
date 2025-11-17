@@ -1,0 +1,54 @@
+@use "./variables.scss" as *;
+
+.rbc-calendar {
+  font-family: "Manrope", sans-serif;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 0.5rem;
+  height: 100%;
+
+  .rbc-header {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: $jetBlack;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .rbc-today {
+    background-color: $greyBlue;
+  }
+
+  .rbc-event {
+    background-color: $deepspaceBlue;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    }
+  }
+
+  .rbc-row-bg {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .rbc-time-content {
+    font-size: 0.85rem;
+    color: #333;
+  }
+
+  .rbc-header + .rbc-header {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}

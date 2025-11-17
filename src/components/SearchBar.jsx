@@ -4,7 +4,13 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { sortById } from "../helpers/SortByID";
 import "../styles/SearchBar.scss";
 
-function SearchBar({ placeholder, data, setFilteredData, searchKey = ["name", "id"], className = "" }) {
+function SearchBar({
+  placeholder,
+  data,
+  setFilteredData,
+  searchKey = ["name", "id"],
+  className = "",
+}) {
   const [wordEntered, setWordEntered] = useState("");
 
   useEffect(() => {
@@ -21,7 +27,10 @@ function SearchBar({ placeholder, data, setFilteredData, searchKey = ["name", "i
       const newFilter = data.filter((item) => {
         return searchKey.some((field) => {
           if (!item[field]) return false;
-          return item[field].toString().toLowerCase().includes(searchWord.toLowerCase());
+          return item[field]
+            .toString()
+            .toLowerCase()
+            .includes(searchWord.toLowerCase());
         });
       });
       setFilteredData(sortById(newFilter));

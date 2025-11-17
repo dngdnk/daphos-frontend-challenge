@@ -1,7 +1,7 @@
 import React from "react";
-import EmployeeTable from "../components/EmployeeTable";
 import SearchBar from "../components/SearchBar";
 import EmployeeJSON from "../data/EmployeeData.json";
+import CalendarComponent from "../components/CalendarComponent";
 import useEmployees from "../hooks/useEmployees";
 import "../styles/Shifts.scss";
 
@@ -20,16 +20,15 @@ function Shifts() {
         <p className="caption">Track and assign shifts here. </p>
         <p className="note">
           (Overview of weekly or monthly shifts with options to view specific
-          employees scheduled shifts)
+          employees' scheduled shifts)
         </p>
       </div>
 
       <div className="shiftsContent">
-        {/* LEFT PANE */}
+        {/* Left pane */}
         <div className="leftPane">
           <div className="leftPaneHeader"></div>
 
-          {/* Container for search + list */}
           <div className="employeeSearchContainer">
             <SearchBar
               placeholder="Search by ID or Name"
@@ -49,19 +48,17 @@ function Shifts() {
                 ))
               ) : (
                 <p style={{ padding: "0.5rem", color: "#999" }}>
-                  No employees found.
+                  No employees found
                 </p>
               )}
             </div>
           </div>
         </div>
 
-        {/* RIGHT PANE */}
+        {/* Right pane */}
         <div className="rightPane">
-          <div className="rightPaneHeader">
-            <h2>Calendar</h2>
-            <div className="calendarContainer"></div>
-            <p className="calendarPlaceholder">Weekly Calendar View</p>
+          <div className="calendarContainer">
+            <CalendarComponent events={[]} />
           </div>
         </div>
       </div>
