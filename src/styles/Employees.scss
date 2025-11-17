@@ -1,119 +1,130 @@
 @use "./variables.scss" as *;
 @use "sass:color";
 
+.employeesPage {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100vh;
+}
+
 .pageHeader {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   margin-bottom: 0rem;
+
+  h1 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: $jetBlack;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .caption {
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: rgb(0, 0, 0);
+    margin: 0;
+  }
 }
 
-.pageHeader h1 {
-  font-family: "Raleway", sans-serif;
-  font-weight: 700;
-  font-size: 2.5rem;
-  color: $jetBlack;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.pageHeader .caption {
-  font-family: "Manrope", sans-serif;
-  font-weight: 400;
-  font-size: 0.95rem;
-  color: rgba(0, 0, 0, 0.6);
-  margin: 0;
+.employeesContent {
+  display: flex; 
+  flex: 1;       
+  gap: 2rem;
+   box-sizing: border-box;
 }
 
 .contentContainer {
-  display: flex;
+  flex: 1; 
   flex-direction: column;
   gap: 1rem;
-  width: 100%;
-}
+      padding-right: 10rem;
+      margin-top: 1.5rem;
 
-.topControls {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  max-width: 80rem;
-  width: 100%;
-}
 
-.employeeSearchBar {
-  flex: 1;
-  max-width: 50%;
-  margin-top: 2rem;
-}
-
-.employeeButtons {
-  display: flex;
-  margin-top: 2rem;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.75rem;
-
-  .downloadButton {
-    display: inline-flex;
+  .topControls {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: none;
-    background-color: $deepspaceBlue;
-    color: white;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 4px;
-    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
-
-    &:hover {
-      background-color: $greyBlue;
-      transform: scale(1.05);
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
-    }
-
-    &:active {
-      transform: scale(0.95);
-      box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px inset;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 px rgba($prussianBlue, 0.3);
-    }
-
-    .downloadIcon {
-      font-size: 1.5rem;
-    }
-  }
-}
-
-.tableWrapper {
-  flex: 1;
-  overflow: auto;
-  max-width: 80rem;
-  border-radius: 13px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 12px;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-}
-
-.dataTable {
-  width: 100%;
-  max-width: 80rem;
-  max-height: 65vh;
-  overflow-y: auto;
-  background-color: white;
-  border-radius: 5px;
-  padding: 0.5rem;
-  padding-top: 1rem;
-
-  table {
+    gap: 1rem;
     width: 100%;
-    border-collapse: collapse;
+    margin-bottom: 1rem;
+
+    .employeeSearchBar {
+        flex: 0 0 50%; 
+    max-width: 50%; 
+    }
+  }
+
+  .employeeButtons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .downloadButton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: none;
+      background-color: $deepspaceBlue;
+      color: white;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.25) 1px 3px 4px;
+      transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+
+      &:hover {
+        background-color: $greyBlue;
+        transform: scale(1.05);
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
+      }
+
+      &:active {
+        transform: scale(0.95);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px inset;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 px rgba($prussianBlue, 0.3);
+      }
+
+      .downloadIcon {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .tableWrapper {
+    flex: 1; 
+    overflow: auto;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 12px;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  .dataTable {
+    width: 100%;
+    max-height: 65vh;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.5rem;
+    padding-top: 1rem;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
   }
 }
