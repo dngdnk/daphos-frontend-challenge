@@ -17,15 +17,21 @@ Built with React.js + Vite as part of the DaphOS Frontend Coding Challenge.
 ### Installation
 To run this project locally, follow these steps: 
 1. Clone the repository:
-<bash
+```
 git clone https://github.com/your-username/your-repo.git
 cd your-repo>
 
-3. Install dependencies:
-<bash block>
+```
+2. Install dependencies:
+```
+npm install
 
-4. Start dev server:
-<bash block>
+```
+3. Start the development server:
+```
+npm run dev
 
+```
+4. Open your browser and navigate ti http://localhost:5173
 
 
