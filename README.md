@@ -18,8 +18,7 @@ Built with React.js + Vite as part of the DaphOS Frontend Coding Challenge.
 To run this project locally, follow these steps: 
 1. Clone the repository:
 ```
-git clone https://github.com/your-username/your-repo.git
-cd your-repo>
+git clone [https://github.com/dngdnk/daphos-frontend-challenge.git]
 ```
 2. Install dependencies:
 ```
@@ -38,11 +37,11 @@ npm run dev
 - **react-big-calendar** – Calendar UI component  
 - **Prettier** – Code formatting
 
-- ## Design Tools
+## Design Tools
 - **Coolors.co** – Generated the color palette for the UI
 - **Cssgradient.io* - Generated the gradient for the background
 
-- ## Resources & Inspiration
+## Resources & Inspiration
 - Sidebar layout inspired by a YouTube tutorial  
 - Search bar implemented following a YouTube guide  
 
