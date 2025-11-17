@@ -44,4 +44,5 @@ npm run dev
 ## Resources & Inspiration
 - Sidebar layout following a Youtube tutorial: https://youtu.be/IQWrdGZvv6Y?si=9wRwds1JSP2I1FMg
 - Search bar following a YouTube guide: https://youtu.be/x7niho285qs?si=8asBBugMHBxNyGqN
+- Data set generated with Mockaroo
 
