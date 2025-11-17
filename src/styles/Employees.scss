@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  max-width: 89rem;
+  max-width: 80rem;
   width: 100%;
 }
 
@@ -92,7 +92,7 @@
 .tableWrapper {
   flex: 1;
   overflow: auto;
-  max-width: 89rem;
+  max-width: 80rem;
   border-radius: 13px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 12px;
 
@@ -104,7 +104,7 @@
 
 .dataTable {
   width: 100%;
-  max-width: 89rem;
+  max-width: 80rem;
   max-height: 65vh;
   overflow-y: auto;
   background-color: white;
