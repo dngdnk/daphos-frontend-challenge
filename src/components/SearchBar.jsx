@@ -4,12 +4,8 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { sortById } from "../helpers/SortByID";
 import "../styles/SearchBar.scss";
 
-function SearchBar({ placeholder, data, setFilteredData }) {
+function SearchBar({ placeholder, data, setFilteredData, searchKey = ["name", "id"], className = "" }) {
   const [wordEntered, setWordEntered] = useState("");
-
-  useEffect(() => {
-    setFilteredData(sortById(data));
-  }, [data]);
 
   useEffect(() => {
     setFilteredData(sortById(data));
@@ -22,13 +18,11 @@ function SearchBar({ placeholder, data, setFilteredData }) {
     if (searchWord === "") {
       setFilteredData(sortById(data));
     } else {
-      const newFilter = data.filter((value) => {
-        return (
-          value.department.toLowerCase().includes(searchWord.toLowerCase()) ||
-          value.name.toLowerCase().includes(searchWord.toLowerCase()) ||
-          value.id.toString().includes(searchWord) ||
-          value.title.toLowerCase().includes(searchWord.toLowerCase())
-        );
+      const newFilter = data.filter((item) => {
+        return searchKey.some((field) => {
+          if (!item[field]) return false;
+          return item[field].toString().toLowerCase().includes(searchWord.toLowerCase());
+        });
       });
       setFilteredData(sortById(newFilter));
     }
@@ -36,11 +30,11 @@ function SearchBar({ placeholder, data, setFilteredData }) {
 
   const clearInput = () => {
     setWordEntered("");
-    setFilteredData(data);
+    setFilteredData(sortById(data));
   };
 
   return (
-    <div className="searchBar">
+    <div className={`searchBar ${className}`}>
       <div className="searchInputs">
         <input
           type="text"

@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "../components/SearchBar";
 import EmployeeTable from "../components/EmployeeTable";
 import AddNewEmployeeButton from "../components/AddNewEmployeeButton";
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
+import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import EmployeeJSON from "../data/EmployeeData.json";
 import useEmployees from "../hooks/useEmployees";
 import "../styles/Employees.scss";
@@ -21,7 +21,7 @@ function Employees() {
   const departmentOptions = [...new Set(data.map((e) => e.department))];
 
   return (
-    <div className="employees">
+    <div className="employeesPage">
       <div className="pageHeader">
         <h1>Employee Overview</h1>
         <p className="caption">
@@ -32,9 +32,11 @@ function Employees() {
       <div className="contentContainer">
         <div className="topControls">
           <SearchBar
-            placeholder="Search by ID, Name, Title or Department"
+            placeholder="Search employees..."
             data={data}
             setFilteredData={setFilteredData}
+            searchKey={["name", "id", "department", "title"]}
+            className="employeeSearchBar"
           />
 
           <div className="employeeButtons">

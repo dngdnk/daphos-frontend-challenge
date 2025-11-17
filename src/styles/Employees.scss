@@ -5,24 +5,24 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  margin-bottom: 0rem;
-}
+  margin-bottom: 0;
 
-.pageHeader h1 {
-  font-family: "Raleway", sans-serif;
-  font-weight: 700;
-  font-size: 2.5rem;
-  color: $jetBlack;
-  margin: 0;
-  line-height: 1.2;
-}
+  h1 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: $jetBlack;
+    margin: 0;
+    line-height: 1.2;
+  }
 
-.pageHeader .caption {
-  font-family: "Manrope", sans-serif;
-  font-weight: 400;
-  font-size: 0.95rem;
-  color: rgba(0, 0, 0, 0.6);
-  margin: 0;
+  .caption {
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: rgb(0, 0, 0);
+    margin: 0;
+  }
 }
 
 .contentContainer {
@@ -36,21 +36,25 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  max-width: 89rem;
   width: 100%;
+  flex-wrap: nowrap;
 }
 
-.searchBar {
-  flex: 1;
-  max-width: 50%;
+.employeeSearchBar {
+  width: 44.5rem;
+  max-width: 100%;
+  margin-top: 2rem;
+  flex-shrink: 1;
+  transition: all 0.3s ease;
 }
 
 .employeeButtons {
   display: flex;
-  margin-top: 2rem;
   align-items: center;
-  justify-content: flex-start;
+  margin-top: 2rem;
   gap: 0.75rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
 
   .downloadButton {
     display: inline-flex;
@@ -89,11 +93,13 @@
 }
 
 .tableWrapper {
-  flex: 1;
-  overflow: auto;
-  max-width: 89rem;
+  flex: 1 1 auto;
+  overflow: hidden;
+  width: 89rem;
+  max-width: 100%;
   border-radius: 13px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 12px;
+  transition: all 0.3s ease;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -105,14 +111,69 @@
   width: 100%;
   max-width: 89rem;
   max-height: 65vh;
-  overflow-y: auto;
+  overflow: hidden;
   background-color: white;
   border-radius: 5px;
   padding: 0.5rem;
   padding-top: 1rem;
+  box-sizing: border-box;
 
   table {
     width: 100%;
     border-collapse: collapse;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .employeeSearchBar {
+    width: 35rem;
+  }
+
+  .tableWrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .employeeSearchBar {
+    width: 28rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .employeeSearchBar {
+    width: 22rem;
+  }
+
+  .pageHeader h1 {
+    font-size: 2rem;
+  }
+
+  .pageHeader .caption {
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .employeeSearchBar {
+    width: 100%;
+  }
+
+  .topControls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .pageHeader h1 {
+    font-size: 1.7rem;
+  }
+
+  .pageHeader .caption {
+    font-size: 0.75rem;
   }
 }
