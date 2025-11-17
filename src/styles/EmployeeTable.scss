@@ -87,7 +87,6 @@
           &:hover {
             transform: scale(1.1);
             color: #851f29;
-        
           }
         }
       }
@@ -132,33 +131,33 @@
   th:nth-child(1),
   td:nth-child(1) {
     width: 9.5%;
-  } // ID
+  }
   th:nth-child(2),
   td:nth-child(2) {
     width: 16%;
-  } // name
+  }
   th:nth-child(3),
   td:nth-child(3) {
     width: 16%;
-  } // title
+  }
   th:nth-child(4),
   td:nth-child(4) {
     width: 13.5%;
-  } // department
+  }
   th:nth-child(5),
   td:nth-child(5) {
     width: 11%;
-  } // status
+  }
   th:nth-child(6),
   td:nth-child(6) {
     width: 15%;
-  } // email
+  }
   th:nth-child(7),
   td:nth-child(7) {
     width: 10%;
-  } // hours
+  }
   th:nth-child(8),
   td:nth-child(8) {
     width: 13.5%;
-  } // actions
+  }
 }
