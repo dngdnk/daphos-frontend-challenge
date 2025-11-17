@@ -3,12 +3,12 @@
 A single-page React application for managing employees and their working shifts.  
 Built with React.js + Vite as part of the DaphOS Frontend Coding Challenge.
 
-## 🚀 Features
+## Features
 - Display list of employees  
 - Add / edit / delete employee records   
 - Responsive UI built with React + Vite  
 
-## 🧰 Setup & Installation
+## Setup & Installation
 
 ### Prerequisites
 - Node.js (v14+ recommended)  
@@ -31,4 +31,18 @@ npm run dev
 ```
 4. Open your browser and navigate to: http://localhost:5173 (or another port shown in your terminal)
 
+## Tech Stack & Libraries
+- **React + Vite** – Core framework and bundler  
+- **MUI Icons** – Icon library  
+- **SweetAlert2** – Popup alerts and modals  
+- **react-big-calendar** – Calendar UI component  
+- **Prettier** – Code formatting
+
+- ## Design Tools
+- **Coolors.co** – Generated the color palette for the UI
+- **Cssgradient.io* - Generated the gradient for the background
+
+- ## Resources & Inspiration
+- Sidebar layout inspired by a YouTube tutorial  
+- Search bar implemented following a YouTube guide  
 
