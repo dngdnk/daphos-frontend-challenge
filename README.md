@@ -39,7 +39,7 @@ npm run dev
 
 ## Design Tools
 - **Coolors.co**: Generated the color palette for the UI
-- **Cssgradient.io**: Generated the gradient for the background
+- **CSSgradient.io**: Generated the gradient for the background
 
 ## Resources & Inspiration
 - Sidebar layout following a Youtube tutorial: https://youtu.be/IQWrdGZvv6Y?si=9wRwds1JSP2I1FMg
