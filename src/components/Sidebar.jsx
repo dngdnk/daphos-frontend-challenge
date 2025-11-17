@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import StarRateOutlinedIcon from "@mui/icons-material/StarRateOutlined";
-import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-
+import HeartBrokenRoundedIcon from '@mui/icons-material/HeartBrokenRounded';
+import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
+import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
+import WorkHistoryRoundedIcon from '@mui/icons-material/WorkHistoryRounded';
+import PersonPinRoundedIcon from '@mui/icons-material/PersonPinRounded';
+import MarkAsUnreadRoundedIcon from '@mui/icons-material/MarkAsUnreadRounded';
 import Profile from "../assets/sunday.png";
 import "../styles/Sidebar.scss";
 
@@ -19,17 +20,27 @@ function Sidebar({ closeMenu, setCloseMenu }) {
     {
       label: "Dashboard",
       path: "/",
-      icon: <DashboardOutlinedIcon className="icon" />,
+      icon: <WidgetsRoundedIcon className="icon" />,
     },
     {
       label: "Employees",
       path: "/employees",
-      icon: <PeopleOutlineOutlinedIcon className="icon" />,
+      icon: <GroupsRoundedIcon className="icon" />,
     },
     {
       label: "Shifts",
       path: "/shifts",
-      icon: <CalendarMonthOutlinedIcon className="icon" />,
+      icon: <WorkHistoryRoundedIcon className="icon" />,
+    },
+      {
+      label: "Mailbox",
+      path: "/mailbox",
+      icon: <MarkAsUnreadRoundedIcon className="icon" />,
+    },
+    {
+      label: "Profile",
+      path: "/profile",
+      icon: <PersonPinRoundedIcon className="icon" />,
     },
   ];
 
@@ -38,7 +49,7 @@ function Sidebar({ closeMenu, setCloseMenu }) {
       {/* Logo */}
       <div className="logoContainer">
         <div className="logo">
-          <StarRateOutlinedIcon className="logoIcon" />
+          <HeartBrokenRoundedIcon className="logoIcon" />
           <h2 className="title">DaphOS</h2>
         </div>
       </div>
@@ -52,7 +63,7 @@ function Sidebar({ closeMenu, setCloseMenu }) {
       <div className="profileContainer">
         <img src={Profile} alt="Profile" className="profileImage" />
         <div className="profileContents">
-          <p className="name">Hello, Sunday!</p>
+          <p className="name">Sunday</p>
           <p className="role">Administrator</p>
           <p className="email">sunday@example.com</p>
         </div>

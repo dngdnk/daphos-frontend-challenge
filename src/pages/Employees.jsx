@@ -1,33 +1,61 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import SearchBar from "../components/SearchBar";
 import EmployeeTable from "../components/EmployeeTable";
-import EmployeeData from "../data/EmployeeData.json";
+import AddNewEmployeeButton from "../components/AddNewEmployeeButton";
+import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
+import EmployeeJSON from "../data/EmployeeData.json";
+import useEmployees from "../hooks/useEmployees";
 import "../styles/Employees.scss";
 
 function Employees() {
-  const [data, setData] = useState(EmployeeData); 
-  const [filteredData, setFilteredData] = useState(EmployeeData); 
+  // attach an internalID to each employee data
+  const initialData = EmployeeJSON.map((item, idx) => ({
+    ...item,
+    _internalId: idx + 1,
+  }));
 
-  const statusOptions = Array.from(
-    new Set(EmployeeData.map((item) => item.status))
-  );
+  const { data, filteredData, setFilteredData, addNewRow, ...tableLogic } =
+    useEmployees(initialData);
+
+  const statusOptions = [...new Set(data.map((e) => e.status))];
+  const departmentOptions = [...new Set(data.map((e) => e.department))];
 
   return (
     <div className="employees">
-      <h1> Employee Overview </h1>
-      <p className="caption"> Details about all your employees in one place.</p>
+      <div className="pageHeader">
+        <h1>Employee Overview</h1>
+        <p className="caption">
+          Details about all your employees in one place.
+        </p>
+      </div>
 
-      <SearchBar
-        placeholder="Search employees by ID, Name, Title or Department"
-        data={data}
-        setFilteredData={setFilteredData}
-      />
+      <div className="contentContainer">
+        <div className="topControls">
+          <SearchBar
+            placeholder="Search by ID, Name, Title or Department"
+            data={data}
+            setFilteredData={setFilteredData}
+          />
 
-      <EmployeeTable
-        data={filteredData}
-        setData={setData}
-        statusOptions={statusOptions}
-      />
+          <div className="employeeButtons">
+            <AddNewEmployeeButton
+              onAdd={() => addNewRow(statusOptions, departmentOptions)}
+            />
+            <button className="downloadButton" title="Download">
+              <DownloadRoundedIcon className="downloadIcon" />
+            </button>
+          </div>
+        </div>
+
+        <div className="tableWrapper">
+          <EmployeeTable
+            data={filteredData}
+            statusOptions={statusOptions}
+            departmentOptions={departmentOptions}
+            {...tableLogic}
+          />
+        </div>
+      </div>
     </div>
   );
 }

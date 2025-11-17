@@ -1,44 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import EditButton from "./EditButton";
 import EditableCell from "./EditableCell";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import "../styles/EmployeeTable.scss";
 
-function EmployeeTable({ data, setData, statusOptions }) {
-  const [editingRow, setEditingRow] = useState(null);
-  const [editedRows, setEditedRows] = useState({});
-
-  const startEditing = (index) => {
-    setEditingRow(index);
-    setEditedRows({ [index]: { ...data[index] } });
-  };
-
-  const saveRow = (index) => {
-    const updatedData = data.map((row, i) =>
-      i === index ? editedRows[index] : row
-    );
-    setData(updatedData);
-    setEditingRow(null);
-  };
-
-  const handleChange = (index, field, value) => {
-    setEditedRows((prev) => ({
-      ...prev,
-      [index]: { ...prev[index], [field]: value },
-    }));
-  };
-
-  const handleDelete = (index) => {
-    const updatedData = data.filter((_, i) => i !== index);
-    setData(updatedData);
-  };
-
+function EmployeeTable({
+  data,
+  departmentOptions,
+  statusOptions,
+  startEditing,
+  confirmSave,
+  confirmDelete,
+  handleChange,
+  editingRow,
+  editedRows,
+  exitEditing,
+}) {
   return (
     <div className="dataTable">
       <table>
         <thead>
           <tr>
-            <th>Action</th>
             <th>ID</th>
             <th>Name</th>
             <th>Title</th>
@@ -46,71 +27,69 @@ function EmployeeTable({ data, setData, statusOptions }) {
             <th>Status</th>
             <th>Email</th>
             <th>Hours</th>
+            <th>Action</th>
           </tr>
         </thead>
+
         <tbody>
-          {data.map((row, index) => {
-            const isEditing = editingRow === index;
-            const currentData = editedRows[index] ?? row;
+          {data.map((row) => {
+            const isEditing = editingRow === row._internalId;
+            const current = editedRows[row._internalId] ?? row;
 
             return (
-              <tr key={index} className={isEditing ? "editing" : ""}>
-                <td className="actions">
-                  <EditButton
-                    isEditing={isEditing}
-                    onEdit={() => startEditing(index)}
-                    onSave={() => saveRow(index)}
-                  />
-                  <DeleteRoundedIcon
-                    className="deleteButton actionIcon"
-                    onClick={() => handleDelete(index)}
-                  />
-                </td>
-
+              <tr key={row._internalId} className={isEditing ? "editing" : ""}>
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.id}
-                  onChange={(val) => handleChange(index, "id", val)}
-                  onSave={() => saveRow(index)}
+                  value={current.id}
+                  onChange={(v) => handleChange(row._internalId, "id", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.name}
-                  onChange={(val) => handleChange(index, "name", val)}
-                  onSave={() => saveRow(index)}
+                  value={current.name}
+                  onChange={(v) => handleChange(row._internalId, "name", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.title}
-                  onChange={(val) => handleChange(index, "title", val)}
-                  onSave={() => saveRow(index)}
-                />
-                <EditableCell
-                  isEditing={isEditing}
-                  value={currentData.department}
-                  onChange={(val) => handleChange(index, "department", val)}
-                  onSave={() => saveRow(index)}
+                  value={current.title}
+                  onChange={(v) => handleChange(row._internalId, "title", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
                   type="select"
-                  value={currentData.status} 
-                  onChange={(val) => handleChange(index, "status", val)}
+                  value={current.department}
+                  selectOptions={departmentOptions} 
+                  onChange={(v) =>
+                    handleChange(row._internalId, "department", v)
+                  }
+                />
+                <EditableCell
+                  isEditing={isEditing}
+                  type="select"
+                  value={current.status}
                   selectOptions={statusOptions}
-                  onSave={() => saveRow(index)}
+                  onChange={(v) => handleChange(row._internalId, "status", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.email}
-                  onChange={(val) => handleChange(index, "email", val)}
-                  onSave={() => saveRow(index)}
+                  value={current.email}
+                  onChange={(v) => handleChange(row._internalId, "email", v)}
                 />
                 <EditableCell
                   isEditing={isEditing}
-                  value={currentData.hours_worked}
-                  onChange={(val) => handleChange(index, "hours_worked", val)}
-                  onSave={() => saveRow(index)}
+                  value={current.hours_worked}
+                  onChange={(v) =>
+                    handleChange(row._internalId, "hours_worked", v)
+                  }
                 />
+                <td className="actions">
+                  <EditButton
+                    isEditing={isEditing}
+                    onEdit={() => startEditing(row._internalId)}
+                    onSaveClick={() => confirmSave(row._internalId)}
+                    onExitEdit={() => exitEditing(row._internalId)}
+                    onDeleteClick={() => confirmDelete(row)}
+                  />
+                </td>
               </tr>
             );
           })}

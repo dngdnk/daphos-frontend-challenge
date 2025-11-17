@@ -1,4 +1,4 @@
-@use './variables.scss' as *;
+@use "./variables.scss" as *;
 
 body {
   overflow: hidden;
@@ -6,7 +6,16 @@ body {
   width: 100vw;
   font-family: $fontFamily;
   -webkit-font-smoothing: antialiased;
-  background-color: $backgroundColor;
+
+  background: #b8d3db;
+  background: linear-gradient(
+    0deg,
+    rgba(184, 211, 219, 1) 0%,
+    rgba(227, 227, 227, 1) 38%,
+    rgba(228, 228, 228, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+
   text-transform: capitalize;
 }
 
@@ -14,7 +23,7 @@ h1 {
   display: flex;
   text-align: left;
   justify-content: flex-start;
-  align-items:flex-start;
+  align-items: flex-start;
   font-weight: 800;
   font-size: 40px;
   font-weight: 700;
@@ -39,13 +48,10 @@ p {
 .mainContent {
   flex: 1;
   padding-top: 2rem;
-  padding-left: 22rem;
+  padding-left: 24rem;
   transition: all 0.5s ease;
 }
 
 .mainContent.collapsed {
   padding-left: 10rem;
 }
-
-
-
