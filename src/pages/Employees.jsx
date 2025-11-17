@@ -32,7 +32,7 @@ function Employees() {
       <div className="contentContainer">
         <div className="topControls">
           <SearchBar
-            placeholder="Search employees..."
+            placeholder="Search employees by ID, name, title or department"
             data={data}
             setFilteredData={setFilteredData}
             searchKey={["name", "id", "department", "title"]}

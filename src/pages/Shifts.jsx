@@ -31,7 +31,7 @@ function Shifts() {
 
           <div className="employeeSearchContainer">
             <SearchBar
-              placeholder="Search by ID or Name"
+              placeholder="Search by ID or name"
               data={data}
               setFilteredData={setFilteredData}
               searchKey={["name", "id"]}
