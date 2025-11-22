@@ -5,14 +5,15 @@ import AddNewEmployeeButton from "../components/AddNewEmployeeButton";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import EmployeeJSON from "../data/EmployeeData.json";
 import useEmployees from "../hooks/useEmployees";
+import { sortById } from "../helpers/SortByID";
 import "../styles/Employees.scss";
 
 function Employees() {
   // attach an internalID to each employee data for accurate change handling to the row (via delete or add)
-  const initialData = EmployeeJSON.map((item, idx) => ({
-    ...item,
+  const initialData = sortById(EmployeeJSON.map((item, idx) => ({
+  ...item,
     _internalId: idx + 1,
-  }));
+  })));
 
   const { data, filteredData, setFilteredData, addNewRow, ...tableLogic } =
     useEmployees(initialData);
